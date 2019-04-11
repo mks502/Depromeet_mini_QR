@@ -8,115 +8,167 @@
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
-		<java-version>1.6</java-version>
-		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
-		<org.aspectj-version>1.6.10</org.aspectj-version>
-		<org.slf4j-version>1.6.6</org.slf4j-version>
-	</properties>
-	<dependencies>
-		<!-- Spring -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>${org.springframework-version}</version>
-			<exclusions>
-				<!-- Exclude Commons Logging in favor of SLF4j -->
-				<exclusion>
-					<groupId>commons-logging</groupId>
-					<artifactId>commons-logging</artifactId>
-				 </exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${org.springframework-version}</version>
-		</dependency>
-				
-		<!-- AspectJ -->
-		<dependency>
-			<groupId>org.aspectj</groupId>
-			<artifactId>aspectjrt</artifactId>
-			<version>${org.aspectj-version}</version>
-		</dependency>	
-		
-		<!-- Logging -->
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${org.slf4j-version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>${org.slf4j-version}</version>
-			<scope>runtime</scope>
-		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.15</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.mail</groupId>
-					<artifactId>mail</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.jms</groupId>
-					<artifactId>jms</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jdmk</groupId>
-					<artifactId>jmxtools</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.sun.jmx</groupId>
-					<artifactId>jmxri</artifactId>
-				</exclusion>
-			</exclusions>
-			<scope>runtime</scope>
-		</dependency>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.7</maven.compiler.source>
+    <maven.compiler.target>1.7</maven.compiler.target>
+    <springframework.version>5.1.5.RELEASE</springframework.version>
+    <tilesframework.version>3.0.7</tilesframework.version>
+  </properties>
 
-		<!-- @Inject -->
-		<dependency>
-			<groupId>javax.inject</groupId>
-			<artifactId>javax.inject</artifactId>
-			<version>1</version>
-		</dependency>
-				
-		<!-- Servlet -->
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-			<version>2.5</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet.jsp</groupId>
-			<artifactId>jsp-api</artifactId>
-			<version>2.1</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jstl</artifactId>
-			<version>1.2</version>
-		</dependency>
+  <dependencies>
+     <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+
+	<dependency>
+	    <groupId>org.mockito</groupId>
+	    <artifactId>mockito-all</artifactId>
+	    <version>1.9.5</version>
+	    <scope>test</scope>
+	</dependency>
+
+    <!--SPRING-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-webmvc</artifactId>
+      <version>${springframework.version}</version>
+    </dependency>
+
+	<!-- Spring Core -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-core</artifactId>
+      <version>${springframework.version}</version>
+    </dependency>
+
+    <!-- Spring TX -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-tx</artifactId>
+      <version>${springframework.version}</version>
+    </dependency>
+    
+    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
+	<dependency>
+   	 <groupId>org.aspectj</groupId>
+   	 <artifactId>aspectjweaver</artifactId>
+    	<version>1.9.2</version>
+	</dependency>
+    
+
+    <!-- Spring ORM support -->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-orm</artifactId>
+      <version>${springframework.version}</version>
+	</dependency>
 	
-		<!-- Test -->
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.7</version>
-			<scope>test</scope>
-		</dependency>        
-	</dependencies>
+	<!-- Spring test -->
+	<dependency>
+	    <groupId>org.springframework</groupId>
+	    <artifactId>spring-test</artifactId>
+	    <version>${springframework.version}</version>
+	    <scope>test</scope>
+	</dependency>
+	
+	<!-- Spring data -->
+	<dependency>
+	    <groupId>org.springframework.data</groupId>
+	    <artifactId>spring-data-jpa</artifactId>
+	    <version>2.1.5.RELEASE</version>
+	</dependency>
+	
+    <!-- JSTL/taglibs -->
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+
+	<!-- https://mvnrepository.com/artifact/org.mariadb.jdbc/mariadb-java-client -->
+<dependency>
+    <groupId>org.mariadb.jdbc</groupId>
+    <artifactId>mariadb-java-client</artifactId>
+    <version>2.4.1</version>
+</dependency>
+
+	
+	<!-- JPA -->
+	<dependency>
+	    <groupId>org.hibernate</groupId>
+	    <artifactId>hibernate-core</artifactId>
+	    <version>5.4.1.Final</version>
+	</dependency>
+	
+	<dependency>
+      <groupId>org.hibernate.javax.persistence</groupId>
+      <artifactId>hibernate-jpa-2.1-api</artifactId>
+      <version>1.0.0.Final</version>
+    </dependency>
+    
+	
+	<!-- lombok -->
+	<dependency>
+    	<groupId>org.projectlombok</groupId>
+    	<artifactId>lombok</artifactId>
+    	<version>1.18.6</version>
+    	<scope>provided</scope>
+	</dependency>
+	
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+	<dependency>
+	    <groupId>com.fasterxml.jackson.core</groupId>
+	    <artifactId>jackson-databind</artifactId>
+	    <version>2.9.8</version>
+	</dependency>
+	
+	<!-- Tiles Core -->
+	<dependency>
+		<groupId>org.apache.tiles</groupId>
+		<artifactId>tiles-core</artifactId>
+		<version>${tilesframework.version}</version>
+	</dependency>
+
+	<!-- Tiles Servlet -->
+	<dependency>
+		<groupId>org.apache.tiles</groupId>
+		<artifactId>tiles-servlet</artifactId>
+		<version>${tilesframework.version}</version>
+	</dependency>
+
+	<!-- Tiles JSP -->
+	<dependency>
+		<groupId>org.apache.tiles</groupId>
+		<artifactId>tiles-jsp</artifactId>
+		<version>${tilesframework.version}</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
+	<dependency>
+    	<groupId>io.springfox</groupId>
+    	<artifactId>springfox-swagger2</artifactId>
+    	<version>2.9.2</version>
+	</dependency>
+	
+	<!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
+	<dependency>
+   	 <groupId>io.springfox</groupId>
+    	<artifactId>springfox-swagger-ui</artifactId>
+   	 <version>2.9.2</version>
+	</dependency>
+	
+	
+  </dependencies>
     <build>
         <plugins>
             <plugin>
