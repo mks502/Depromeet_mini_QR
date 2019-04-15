@@ -5,6 +5,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.depromeet.mini_QR.domain.entity.Member.MemberBuilder;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,7 +17,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Member {
+public class Comment {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	String mid;
+	String commentId;
+	String content;
+	Integer likeCount;
 }

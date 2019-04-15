@@ -1,4 +1,4 @@
-package com.depromeet.mini_QR.controller;
+package com.depromeet.mini_QR.domain.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
