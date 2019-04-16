@@ -16,7 +16,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.depromeet.mini_QR", "com.depromeet.mini_QR.jpa"})
+@ComponentScan(basePackages = {"com.depromeet.mini_QR", "com.depromeet.mini_QR.domain"})
 @EnableAspectJAutoProxy
 public class WebConfig implements WebMvcConfigurer {
 

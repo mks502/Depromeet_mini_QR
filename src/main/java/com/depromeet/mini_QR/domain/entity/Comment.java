@@ -4,8 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import com.depromeet.mini_QR.domain.entity.Member.MemberBuilder;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,4 +22,7 @@ public class Comment {
 	String commentId;
 	String content;
 	Integer likeCount;
+	@ManyToOne
+	@JoinColumn(name = "chatRoom")
+	ChatRoom chatRoom;
 }
