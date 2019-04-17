@@ -20,7 +20,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-@EnableJpaRepositories("com.depromeet.mini_QR.domain")
+@EnableJpaRepositories("com.depromeet.mini_QR.domain.*")
 @EnableTransactionManagement
 @PropertySource("classpath:/com/depromeet/mini_QR/config/db.properties")
 public class PersistenceJPAConfig {
@@ -32,7 +32,7 @@ public class PersistenceJPAConfig {
 	public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
 		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
 		em.setDataSource(dataSource());
-		em.setPackagesToScan(new String[] { "com.depromeet.mini_QR.domain" });
+		em.setPackagesToScan(new String[] {"com.depromeet.mini_QR.domain.*"});
 	
 		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
 		em.setJpaVendorAdapter(vendorAdapter);
