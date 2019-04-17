@@ -17,5 +17,5 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Member {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
-	String mid;
+	Long mid;
 }

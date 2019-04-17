@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.depromeet.mini_QR.domain.entity.ChatRoom;
 @Transactional
 @Repository
-public interface ChatRoomRepository extends JpaRepository<String,ChatRoom> {
-	
-	
+public interface ChatRoomRepository extends JpaRepository<ChatRoom, Long>{
+	public ChatRoom findByChatTitle(String title);
+
 }

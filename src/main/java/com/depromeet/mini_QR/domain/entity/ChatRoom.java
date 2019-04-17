@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ChatRoom {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	String chatId;
+	Long chatId;
 	String chatTitle;
 	String fullURL;
 	String shortURL;

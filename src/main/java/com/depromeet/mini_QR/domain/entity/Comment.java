@@ -1,11 +1,14 @@
 package com.depromeet.mini_QR.domain.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ColumnDefault;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,9 +22,10 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Comment {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	String commentId;
+	Long commentId;
 	String content;
-	Integer likeCount;
+	@Builder.Default
+	Integer likeCount=0;
 	@ManyToOne
 	@JoinColumn(name = "chatRoom")
 	ChatRoom chatRoom;
