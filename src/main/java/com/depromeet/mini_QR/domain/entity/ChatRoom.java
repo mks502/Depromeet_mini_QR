@@ -1,5 +1,6 @@
 package com.depromeet.mini_QR.domain.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,7 +19,10 @@ import lombok.NoArgsConstructor;
 public class ChatRoom {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	Long chatId;
+	
+	@Column(nullable = false)
 	String chatTitle;
+	
 	String fullURL;
 	String shortURL;
 }

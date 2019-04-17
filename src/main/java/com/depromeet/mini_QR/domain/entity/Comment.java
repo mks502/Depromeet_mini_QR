@@ -23,9 +23,13 @@ import lombok.NoArgsConstructor;
 public class Comment {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
 	Long commentId;
+	
+	@Column(nullable = false)
 	String content;
+	
 	@Builder.Default
 	Integer likeCount=0;
+	
 	@ManyToOne
 	@JoinColumn(name = "chatRoom")
 	ChatRoom chatRoom;
