@@ -24,6 +24,7 @@ public class SwaggerConfig {
           .build();                                           
     }
     
+    // Spring MVC의 경우 아래 코드를 추가해야 함.(Spring Boot의 경우 불필요) 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("swagger-ui.html")
           .addResourceLocations("classpath:/META-INF/resources/");

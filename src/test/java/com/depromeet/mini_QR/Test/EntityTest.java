@@ -13,9 +13,9 @@ import org.springframework.test.context.web.WebAppConfiguration;
 
 import com.depromeet.mini_QR.config.PersistenceJPAConfig;
 import com.depromeet.mini_QR.config.WebConfig;
-import com.depromeet.mini_QR.domain.entity.ChatRoom;
+import com.depromeet.mini_QR.domain.entity.SeminarRoom;
 import com.depromeet.mini_QR.domain.entity.Comment;
-import com.depromeet.mini_QR.domain.repository.ChatRoomRepository;
+import com.depromeet.mini_QR.domain.repository.SeminarRoomRepository;
 import com.depromeet.mini_QR.domain.repository.CommentRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,45 +23,45 @@ import com.depromeet.mini_QR.domain.repository.CommentRepository;
 @ContextConfiguration(classes = {WebConfig.class, PersistenceJPAConfig.class}, loader=AnnotationConfigWebContextLoader.class)
 public class EntityTest {
 	@Autowired
-	ChatRoomRepository chatRoomRepository;
+	SeminarRoomRepository seminarRoomRepository;
 	@Autowired
 	CommentRepository commentRepository;
 
 	@Test
 	public void test() {		
-		ChatRoom chatroom1 = ChatRoom.builder()
-				.chatTitle("채팅방1")
+		SeminarRoom seminarRoom1 = SeminarRoom.builder()
+				.seminarTitle("채팅방1")
 				.build();
-		ChatRoom chatroom2 = ChatRoom.builder()
-				.chatTitle("채팅방2")
+		SeminarRoom seminarRoom2 = SeminarRoom.builder()
+				.seminarTitle("채팅방2")
 				.build();
 		Comment c1=Comment.builder()
-				.content("댓글1").chatRoom(chatroom1).likeCount(20)
+				.content("댓글1").seminarRoom(seminarRoom1).likeCount(20)
 				.build();
 		Comment c2=Comment.builder()
-				.content("댓글2").chatRoom(chatroom1)
+				.content("댓글2").seminarRoom(seminarRoom1)
 				.build();
 		Comment c3=Comment.builder()
-				.content("댓글3").chatRoom(chatroom1)
+				.content("댓글3").seminarRoom(seminarRoom1)
 				.build();
 		
-		chatRoomRepository.save(chatroom1);
-		chatRoomRepository.save(chatroom2);
+		seminarRoomRepository.save(seminarRoom1);
+		seminarRoomRepository.save(seminarRoom2);
 		commentRepository.save(c1);
 		commentRepository.save(c2);
 		commentRepository.save(c3);
 
-		List<Comment> commentList= commentRepository.findBychatRoom(chatroom1);
+		List<Comment> commentList= commentRepository.findBySeminarRoom(seminarRoom1);
 		for (Comment comment : commentList) {
 			System.out.println(comment);
 		}
-		ChatRoom findedChatRoom= chatRoomRepository.findByChatTitle("채팅방1");
+		SeminarRoom findedSeminarRoom= seminarRoomRepository.findBySeminarTitle("채팅방1");
 		
-		findedChatRoom.setChatTitle("변경된 채팅방1");
-		chatRoomRepository.save(findedChatRoom);
+		findedSeminarRoom.setSeminarTitle("변경된 채팅방1");
+		seminarRoomRepository.save(findedSeminarRoom);
 		
 		
-		commentList= commentRepository.findBychatRoom(chatroom1);
+		commentList= commentRepository.findBySeminarRoom(seminarRoom1);
 		for (Comment comment : commentList) {
 			System.out.println(comment);
 		}
@@ -72,7 +72,7 @@ public class EntityTest {
 	}
 	
 //	public void allDelete() {
-//		chatRoomRepository.deleteAll();
+//		seminarRoomRepository.deleteAll();
 //		commentRepository.deleteAll();
 //	}
 }

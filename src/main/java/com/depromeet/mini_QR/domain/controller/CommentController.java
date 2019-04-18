@@ -12,7 +12,7 @@ import com.depromeet.mini_QR.domain.entity.Comment;
 import com.depromeet.mini_QR.domain.service.CommentService;
 
 @RestController
-@RequestMapping(value = "/api/comments")  //임시 api       /api/{chatRoomID}/comments 이런 형식예상..
+@RequestMapping(value = "/api/comments")  //임시 api       /api/{seminarRoomID}/comments 이런 형식예상..
 public class CommentController {
 	
 	@Autowired

@@ -13,7 +13,7 @@ import org.springframework.web.context.WebApplicationContext;
 @RunWith(SpringJUnit4ClassRunner.class)
 // Todo: @ContextConfiguration locations 설정 맞는지 확인 
 @ContextConfiguration(locations = { "file:src/main/webapp/WEB-INF/spring/appServlet/dispatcher-servlet.xml" })
-public class ChatRoomRepositoryTest {
+public class SeminarRoomRepositoryTest {
 
 	@Autowired
 	private WebApplicationContext ctx;

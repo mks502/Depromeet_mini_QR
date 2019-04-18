@@ -15,10 +15,10 @@ public class HomeController {
         return "home";
     }
 	
-	@PostMapping(value = "/chat/{chatId}")
-	public String setChatName(HttpServletRequest req, HttpServletResponse res){
-		String chatName = req.getParameter("chatName");
+	@PostMapping(value = "/seminar/{seminarId}")
+	public String setSeminarName(HttpServletRequest req, HttpServletResponse res){
+		String seminarName = req.getParameter("seminarName");
 		
-		return chatName;
+		return seminarName;
 	}
 }

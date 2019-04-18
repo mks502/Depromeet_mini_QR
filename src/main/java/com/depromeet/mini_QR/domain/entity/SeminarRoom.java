@@ -16,12 +16,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ChatRoom {
+public class SeminarRoom {
 	@Id @GeneratedValue(strategy=GenerationType.AUTO)
-	Long chatId;
+	Long seminarId;
 	
 	@Column(nullable = false)
-	String chatTitle;
+	String seminarTitle;
 	
 	String fullURL;
 	String shortURL;

@@ -31,6 +31,6 @@ public class Comment {
 	Integer likeCount=0;
 	
 	@ManyToOne
-	@JoinColumn(name = "chatRoom")
-	ChatRoom chatRoom;
+	@JoinColumn(name = "seminarRoom")
+	SeminarRoom seminarRoom;
 }
