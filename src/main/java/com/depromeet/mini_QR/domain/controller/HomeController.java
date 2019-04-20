@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.depromeet.mini_QR.domain.entity.SeminarRoom;
 import com.depromeet.mini_QR.domain.service.SeminarRoomService;
-@RestController
+@Controller
 public class HomeController {
 	
 	@GetMapping(value = "/")
