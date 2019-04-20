@@ -23,7 +23,7 @@ public class HomeController {
 	@Autowired
 	SeminarRoomService seminarRoomService;
 	
-	@PostMapping(value = "/seminar/{seminarId}")
+	@PostMapping(value = "/seminar/create")
 	public void setSeminarName(@RequestBody SeminarRoom seminarTitle, HttpServletRequest request){
 		seminarRoomService.postSeminarRoomTitle(seminarTitle);
 	}
