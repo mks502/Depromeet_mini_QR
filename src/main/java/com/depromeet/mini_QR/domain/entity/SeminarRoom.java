@@ -6,6 +6,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.depromeet.mini_QR.domain.dto.SeminarRoomDto;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -25,4 +27,13 @@ public class SeminarRoom {
 	
 	String fullURL;
 	String shortURL;
+	
+	public SeminarRoomDto toDto(){
+		return SeminarRoomDto.builder()
+				.seminarId(seminarId)
+				.seminarTitle(seminarTitle)
+				.fullURL(fullURL)
+				.shortURL(shortURL)
+				.build();
+	}
 }

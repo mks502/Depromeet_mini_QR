@@ -19,12 +19,4 @@ public class HomeController {
     public String index(HttpServletRequest req, HttpServletResponse res) {
         return "home";
     }
-	
-	@Autowired
-	SeminarRoomService seminarRoomService;
-	
-	@PostMapping(value = "/seminar/create")
-	public void setSeminarName(@RequestBody SeminarRoom seminarTitle, HttpServletRequest request){
-		seminarRoomService.postSeminarRoomTitle(seminarTitle);
-	}
 }

@@ -8,5 +8,5 @@ import com.depromeet.mini_QR.domain.entity.Member;
 @Transactional
 @Repository
 public interface MemberRepository extends JpaRepository<Member, Long>{
-
+	Long countByMid(Long mid);	
 }
