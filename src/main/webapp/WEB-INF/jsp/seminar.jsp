@@ -18,7 +18,6 @@
     <button class="send">보내기</button>
 </div>
 <script>
-	alert("실행1");
     $(function () {
         var chatBox = $('.chat_box');
         var messageInput = $('input[name="message"]');
