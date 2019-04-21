@@ -1,6 +1,8 @@
 package com.depromeet.mini_QR.Test;
 
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +39,7 @@ public class EntityTest {
 	MemberRepository memRepository;
 
 	@Test
-	public void test() {		
+	public void test() throws MalformedURLException, IOException {		
 		SeminarRoom seminarRoom1 = SeminarRoom.builder()
 				.seminarTitle("채팅방1")
 				.build();
