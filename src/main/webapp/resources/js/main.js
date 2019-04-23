@@ -395,7 +395,7 @@ var seminarID = null;
 // Web Socket configuration
 var stompClient = null;
 const connectWebSockets = () => {
-    var socket = new SockJS('mini_QR/q-rank-websock');
+	var socket = new SockJS('/mini_QR/q-rank-websock');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, (frame) => {
         setConnected(true);
