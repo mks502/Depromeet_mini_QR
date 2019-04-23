@@ -4,6 +4,10 @@
 ### Java ###
 # Compiled class file
 *.class
+.project
+.classpath
+.settings/
+rebel.xml
 
 # Log file
 *.log
