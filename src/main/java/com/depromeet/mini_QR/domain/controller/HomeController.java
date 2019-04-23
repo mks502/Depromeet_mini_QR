@@ -17,6 +17,6 @@ public class HomeController {
 	
 	@GetMapping(value = "/")
     public String index(HttpServletRequest req, HttpServletResponse res) {
-        return "seminar";
+        return "home";
     }
 }

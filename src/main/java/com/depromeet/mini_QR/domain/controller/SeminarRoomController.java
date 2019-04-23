@@ -3,11 +3,9 @@ package com.depromeet.mini_QR.domain.controller;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,10 +19,18 @@ public class SeminarRoomController {
 	@Autowired
 	SeminarRoomService seminarRoomService;
 	
+//	@PostMapping(value = "/create")
+//	public SeminarRoomDto setSeminarName(@RequestBody SeminarRoom seminarTitle, HttpServletRequest request) throws MalformedURLException, IOException{
+//		SeminarRoomDto newSeminar = seminarRoomService.createSeminar(seminarTitle);
+//		return newSeminar;
+//	}
+	
 	@PostMapping(value = "/create")
-	public SeminarRoomDto setSeminarName(@RequestBody SeminarRoom seminarTitle, HttpServletRequest request) throws MalformedURLException, IOException{
+	public SeminarRoomDto setSeminarName(SeminarRoom seminarTitle) throws MalformedURLException, IOException{
+		System.out.println(seminarTitle);
 		SeminarRoomDto newSeminar = seminarRoomService.createSeminar(seminarTitle);
+		System.out.println("aslfkjaslfkjslka");
+		System.out.println("하아히ㅏㅣㅏ");
 		return newSeminar;
 	}
-
 }
