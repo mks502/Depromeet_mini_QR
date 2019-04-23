@@ -9,5 +9,6 @@ import com.depromeet.mini_QR.domain.entity.SeminarRoom;
 @Repository
 public interface SeminarRoomRepository extends JpaRepository<SeminarRoom, Long>{
 	public SeminarRoom findBySeminarTitle(String title);
+	public SeminarRoom findBySeminarId(Long id);
 
 }

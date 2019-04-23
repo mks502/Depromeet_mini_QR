@@ -1,11 +1,10 @@
 package com.depromeet.mini_QR.domain.service;
 
+import static com.rosaloves.bitlyj.Bitly.as;
+import static com.rosaloves.bitlyj.Bitly.shorten;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,8 +12,7 @@ import org.springframework.stereotype.Service;
 import com.depromeet.mini_QR.domain.dto.SeminarRoomDto;
 import com.depromeet.mini_QR.domain.entity.SeminarRoom;
 import com.depromeet.mini_QR.domain.repository.SeminarRoomRepository;
-import com.rosaloves.bitlyj.Url; 
-import static com.rosaloves.bitlyj.Bitly.*;
+import com.rosaloves.bitlyj.Url;
 
 @Service
 public class SeminarRoomService {
@@ -45,5 +43,9 @@ public class SeminarRoomService {
 		String shortUrl = url.getShortUrl();
 		
 		return shortUrl;
+	}
+	public SeminarRoomDto findSeminar(Long id) {
+		SeminarRoom seminarRoom= seminarRoomRepository.findBySeminarId(id);
+		return seminarRoom.toDto();
 	}
 }

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +18,9 @@ import com.depromeet.mini_QR.domain.dto.SeminarRoomDto;
 import com.depromeet.mini_QR.domain.entity.SeminarRoom;
 import com.depromeet.mini_QR.domain.service.SeminarRoomService;
 
+
+////그냥 Controller
 @Controller
-@RequestMapping(value = "/api/seminar1")
 public class SeminarRoomJustController {
 	@Autowired
 	SeminarRoomService seminarRoomService;
@@ -36,15 +39,41 @@ public class SeminarRoomJustController {
 //		return newSeminar;
 //	}
 	
-	@PostMapping(value = "/create")      //FormData 방식
-	public ModelAndView setSeminarName(SeminarRoom seminarTitle) throws MalformedURLException, IOException{
-		ModelAndView mv = new ModelAndView();
+//	@PostMapping(value = "/create")      //FormData 방식
+//	public ModelAndView setSeminarName(SeminarRoom seminarTitle) throws MalformedURLException, IOException{
+//		ModelAndView mv = new ModelAndView();
+//		System.out.println(seminarTitle);
+//		System.out.println("모델엔 뷰야");
+//		SeminarRoomDto newSeminar = seminarRoomService.createSeminar(seminarTitle);
+//		mv.addObject("SeminarRoomDto",newSeminar);
+//		mv.setViewName("main");
+//		System.out.println(newSeminar);
+//		return mv;
+//	}
+	
+	@PostMapping(value = "/api/seminar1/create")      //FormData 방식
+	public String setSeminarName(SeminarRoom seminarTitle) throws MalformedURLException, IOException{
 		System.out.println(seminarTitle);
 		System.out.println("모델엔 뷰야");
 		SeminarRoomDto newSeminar = seminarRoomService.createSeminar(seminarTitle);
-		mv.addObject(newSeminar);
-		mv.setViewName("main");
 		System.out.println(newSeminar);
+		String move="redirect:/seminar/"+newSeminar.getSeminarId().toString();
+		System.out.println(move);		
+		return move;
+	}
+	
+	@RequestMapping(value = "/seminar/{seminarId}")      //방입장
+	public ModelAndView EnterSeminarRoom(@PathVariable String seminarId) throws MalformedURLException, IOException{
+		ModelAndView mv = new ModelAndView();
+		System.out.println(seminarId);
+		Long id= Long.parseLong(seminarId);
+		SeminarRoomDto seminarRoom=seminarRoomService.findSeminar(id);
+		if(seminarRoom==null) {
+			return null;
+		}
+		mv.addObject("SeminarRoomDto",seminarRoom);
+		mv.setViewName("main");
+		System.out.println(seminarRoom);
 		return mv;
 	}
 }

@@ -9,7 +9,7 @@
         <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
         <!-- Custom Stylesheet & Script -->
-        <link rel='stylesheet' type='text/css' href='<%=request.getContextPath() %>/css/main.css'/>
+        <link rel='stylesheet' type='text/css' href='<%=request.getContextPath() %>/css/main.css' />
         <script src='<%=request.getContextPath() %>/js/main.js' ></script> 
     </head>
     <body>
@@ -29,8 +29,8 @@
                     <div class="box-5-col-1">
                         <div class="box-5-title-1">세미나 이름</div>
                         <div class="box-5-col-1-contents-1">
-                            <div>${seminarTitle}</div>
-                            <div>(82명)</div>
+                            <div>${SeminarRoomDto.seminarTitle}</div>
+                            <div>(83명)</div>
                         </div>
                     </div>
                     <!-- URL 정보 표시  -->
@@ -38,7 +38,7 @@
                         <div class="box-5-title-2">URL
                         </div>
                         <div class="box-5-col-1-contents-2">
-                            <div class="url-address">${shortURL}</div>
+                            <div class="url-address">${SeminarRoomDto.shortURL}</div>
                             <img src="<%=request.getContextPath() %>/images/url_copy_button.png" class="url-copy-button" alt="Copy button of URL">
                             <img src="<%=request.getContextPath() %>/images/Copy_interaction_2.gif" class="url-copy-animation" alt="url copy animation">
                         </div>
