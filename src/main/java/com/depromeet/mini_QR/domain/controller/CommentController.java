@@ -22,6 +22,6 @@ public class CommentController {
     public void enrollComment(@RequestBody Comment comment, HttpServletRequest request){
 		System.out.println(comment);
 		commentService.postComment(comment);
-		System.out.println("바당");
+		System.out.println("받아");
 	}
 }
