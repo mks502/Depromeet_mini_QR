@@ -53,12 +53,12 @@ public class SeminarRoomJustController {
 	
 	@PostMapping(value = "/api/seminar1/create")      //FormData 방식
 	public String setSeminarName(SeminarRoom seminarTitle) throws MalformedURLException, IOException{
-		System.out.println(seminarTitle);
+		System.out.println("seminarTitle = "+seminarTitle);
 		System.out.println("모델엔 뷰야");
 		SeminarRoomDto newSeminar = seminarRoomService.createSeminar(seminarTitle);
-		System.out.println(newSeminar);
+		System.out.println("newSeminar = "+newSeminar);
 		String move="redirect:/seminar/"+newSeminar.getSeminarId().toString();
-		System.out.println(move);		
+		System.out.println("move = "+move);		
 		return move;
 	}
 	
@@ -73,7 +73,7 @@ public class SeminarRoomJustController {
 		}
 		mv.addObject("SeminarRoomDto",seminarRoom);
 		mv.setViewName("main");
-		System.out.println(seminarRoom);
+		System.out.println("seminarRoom = "+seminarRoom);
 		return mv;
 	}
 }

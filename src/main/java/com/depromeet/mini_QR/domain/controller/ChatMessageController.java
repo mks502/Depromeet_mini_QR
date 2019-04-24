@@ -16,14 +16,11 @@ public class ChatMessageController {
         this.template = template;
     }
 
-    @MessageMapping("/chat/join")
-    public void join(Comment message) {
-        message.setContent(message.getCommentId() + "님이 입장하셨습니다.");
-        template.convertAndSend("/subscribe/chat/room/" + message.getSeminarRoom(), message);
-    }
-    @MessageMapping("/chat/message")
+    @MessageMapping("/updates")
     public void message(Comment message) {
-        template.convertAndSend("/subscribe/chat/room/" + message.getSeminarRoom(), message);
+        template.convertAndSend("/seminar/39" + message.getSeminarRoom(), message);
+        // @SendTo: /seminar/{seminarId}
+        // template.convertAndSend("/seminar/{seminarId}" + message.getSeminarRoom(), message);
     }
 
 }

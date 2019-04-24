@@ -401,7 +401,7 @@ const connectWebSockets = () => {
         setConnected(true);
         console.log('Connected: ' + frame);
         // 원래 path: `/seminar/${seminarID}`
-        stompClient.subscribe(`/seminar/112`, (res) => {
+        stompClient.subscribe(`/seminar/39`, (res) => {
             // parse JSON response
             // const type = JSON.parse(res.body).type;
             console.log(res);
@@ -428,7 +428,7 @@ const connectWebSockets = () => {
 // Send message via web sockets
 function sendNewQuestion() {
     $( ".send-question" ).click(function(){
-        const seminarId = 112;
+        const seminarId = 39;
         const content = document.querySelector(".new-question").value;
         const message = JSON.stringify({'seminarId': seminarId, 'content': content});
         console.log("JSON: ", message);
