@@ -25,6 +25,12 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.jsp("/WEB-INF/jsp/", ".jsp");
 	}
 	
+//	@Override
+//    public void addViewControllers(org.springframework.web.servlet.config.annotation.ViewControllerRegistry registry) {
+//        // 404 오류가 발생했을때 보여줄 뷰
+//        registry.addViewController("classpath:/META-INF/resources/html/**").setViewName("/404.html");
+//    }
+	
 	@Override
 	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
 	    registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
