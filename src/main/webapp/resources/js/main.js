@@ -186,7 +186,7 @@ const sendNewQuestion = () => {
     const content = document.querySelector("textarea").value;
     const message = JSON.stringify({'seminarId': seminarId, 'content': content});
     console.log("데이터 전송합니다: ", message);
-    stompClient.send("/updates", {}, message);
+    stompClient.send("/updates/13", {}, message);
 };
 
 // 랭킹 버튼 클릭 시, 랭킹 순위 공개 및 숨김
