@@ -21,6 +21,7 @@ public class ChatMessageController {
         this.template = template;
     }
 
+    // @MessageMapping("/")
     @MessageMapping("/updates")
     public void message(Comment message) {
     	System.out.println("message 전송 메소드 들어오나요 ");
