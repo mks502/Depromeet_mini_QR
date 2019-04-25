@@ -13,5 +13,5 @@ import com.depromeet.mini_QR.domain.entity.Comment;
 public interface CommentRepository extends JpaRepository<Comment, Long>{
 	public List<Comment> findBySeminarRoom(SeminarRoom seminarRoom);
 	public List<Comment> findAllBySeminarRoom(SeminarRoom seminarRoom);
-	public List<Comment> findAllBySeminarRoomOrderByLikeCountDesc(SeminarRoom seminarRoom);
+	public List<Comment> findTop3BySeminarRoomOrderByLikeCountDesc(SeminarRoom seminarRoom);
 }

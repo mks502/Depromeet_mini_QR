@@ -1,5 +1,6 @@
 package com.depromeet.mini_QR.domain.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.depromeet.mini_QR.domain.dto.CommentDto;
 import com.depromeet.mini_QR.domain.dto.CommentSendDto;
+import com.depromeet.mini_QR.domain.dto.SeminarRoomDto;
 import com.depromeet.mini_QR.domain.entity.Comment;
 import com.depromeet.mini_QR.domain.entity.SeminarRoom;
 import com.depromeet.mini_QR.domain.repository.CommentRepository;
@@ -92,7 +94,6 @@ public class ChatMessageController {
         		.build();
         
         
-        
         this.template.convertAndSend("/subscribe/seminar/"+a, commentSendDto);
         
         System.out.println("message = "+message+" "+id);
@@ -136,6 +137,21 @@ public class ChatMessageController {
     }
     
     
-    //public void likeUnlike()
+    public void getCommentRanking(Long seminarId) {
+    	seminarId = (long) 10;
+    		
+    	SeminarRoomDto seminarRoomDto = SeminarRoomDto.builder()
+    			.seminarId(seminarId)
+    			.build();
+    	
+    	List<Comment> commentList = commentRepository.findTop3BySeminarRoomOrderByLikeCountDesc(seminarRoomDto.toEntity());
+    	
+    	CommentSendDto commentSendDto = CommentSendDto.builder()
+        		.type("ranking").comment((Comment) commentList)
+        		.build();
+    	
+    	System.out.println();
+    	
+    }
 
 }
