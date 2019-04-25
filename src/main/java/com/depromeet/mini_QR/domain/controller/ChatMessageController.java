@@ -80,7 +80,43 @@ public class ChatMessageController {
         SeminarRoom s= srRepo.findBySeminarId(Long.parseLong(id));
         message.setSeminarRoom(s);
         message.setLikeCount( message.getLikeCount()+1 );
+        
         commentRepository.save(message);
+        
+        System.out.println(message.getSeminarRoom().getSeminarId());
+        String a=message.getSeminarRoom().getSeminarId().toString();
+        System.out.println("Aa"+a);
+        
+        CommentSendDto commentSendDto = CommentSendDto.builder()
+        		.type("like").comment(message)
+        		.build();
+        
+        
+        
+        this.template.convertAndSend("/subscribe/seminar/"+a, commentSendDto);
+        
+        System.out.println("message = "+message+" "+id);
+        
+        System.out.println("======================================================= ");
+        // @SendTo: /seminar/{seminarId}
+    }
+    
+    @MessageMapping("/unlike")
+    public void unlike(Comment message, @PathVariable Map<String, Object> jsonData) {
+    	
+    	
+    	System.out.println("message 전송시작========================================= ");
+    	
+        
+        // message.setSeminarRoom((SeminarRoom)jsonData.get("seminarId"));
+   
+        String id=(String) jsonData.get("seminarId");
+        SeminarRoom s= srRepo.findBySeminarId(Long.parseLong(id));
+        message.setSeminarRoom(s);
+        message.setLikeCount( message.getLikeCount()-1 );
+        
+        commentRepository.save(message);
+        
         System.out.println(message.getSeminarRoom().getSeminarId());
         String a=message.getSeminarRoom().getSeminarId().toString();
         System.out.println("Aa"+a);
