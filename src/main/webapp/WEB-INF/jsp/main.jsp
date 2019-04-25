@@ -10,16 +10,17 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
         <!-- Custom Stylesheet & Script -->
         <link rel='stylesheet' type='text/css' href='<%=request.getContextPath() %>/css/main.css' />
+        <script src="<%=request.getContextPath() %>/js/jquery.qrcode.min.js"></script>
         <script src='<%=request.getContextPath() %>/js/main.js' ></script> 
     </head>
-    <body>
+    <body class="">
         <div class="container">
             
             <!-- 세미나 방 정보 표시 -->
             <div class="column-1">
                 <div class="box-5">
                     <div class="mobile-box-5-title-1">
-                        <div>Question Ranking</div>
+                        <div>Our Question</div>
                         <div>
                             <img src="<%=request.getContextPath() %>/images/change-background-color-to-yellow.png" class="yellow-button" alt="Change the background color to yellow">
                             <img src="<%=request.getContextPath() %>/images/change-background-color-to-dark.png" class="dark-button" alt="Change the background color to dark">
@@ -30,7 +31,7 @@
                         <div class="box-5-title-1">세미나 이름</div>
                         <div class="box-5-col-1-contents-1">
                             <div>${SeminarRoomDto.seminarTitle}</div>
-                            <div>(83명)</div>
+                            <div class="number-of-people">(83명)</div>
                         </div>
                     </div>
                     <!-- URL 정보 표시  -->
@@ -51,7 +52,7 @@
                             <img src="<%=request.getContextPath() %>/images/qr-code-fold-button.png" class="qr-code-fold-button" alt="qr-code-fold-button">
                             <img src="<%=request.getContextPath() %>/images/qr-code-more-button.png" class="qr-code-more-button" alt="qr-code-more-button">
                         </div>
-                        <img src="<%=request.getContextPath() %>/images/qr_code.png" class="box-qr-code" alt="QR code">
+                        <div id="qrcode" class="box-qr-code"></div>
                     </div>
                 </div>
             </div>
@@ -73,7 +74,7 @@
                 <div class="Question-ranking-more">
                     <div class="top-1">
                         <div class="star-and-number">
-                            <img src="<%=request.getContextPath() %>/images/three_star.png" alt="Star symbol">
+                            <img src="<%=request.getContextPath() %>/images/one_star.png" alt="Star symbol">
                             <div>27</div>
                         </div>
                         <div class="ranking-text-rank-1 text-more">이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요?</div>
@@ -82,7 +83,7 @@
                     </div>
                     <div class="top-2">
                         <div class="star-and-number">
-                            <img src="<%=request.getContextPath() %>/images/two_star.png" alt="Star symbol">
+                            <img src="<%=request.getContextPath() %>/images/one_star.png" alt="Star symbol">
                             <div>20</div>
                         </div>
                         <div class="ranking-text-rank-2 text-more">이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요?</div>
@@ -140,9 +141,7 @@
 
             <!-- QR 코드 모덜 -->
             <div class="modal">
-                <div class="modal-content">
-                    <img src="<%=request.getContextPath() %>/images/qr_code.png" alt="QR code">
-                </div>
+                <div id="modalqrcode" class="modal-content"></div>
             </div>
         </div>
     </body>

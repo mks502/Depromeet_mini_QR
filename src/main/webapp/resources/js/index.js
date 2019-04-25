@@ -1,11 +1,11 @@
-// UI 인터랙션
+// UI interaction
 const backgroundColor = function ChangeBackgroundColorYellowOrDark() {
     const $yellowButton = $('.yellow-button');
     const $darkButton = $('.dark-button');
     const $body = $('body');
     const $questionRankingText = $('.question-ranking-text');
     
-    const $initialBody = $('#initial-body');
+    const $initialBody = $('.container');
 
     $yellowButton.click(function() {
         $body.removeClass('dark-version');

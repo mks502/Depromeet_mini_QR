@@ -120,6 +120,15 @@ const connectWebSockets = () => {
 
 // URL 복사 아이콘 클릭 시, URL을 클립보드에 복사
 const copyURL = () => {
+    const $urlAdress = $('.url-address');
+    const $urlContents = $('.box-5-col-1-contents-2');
+
+    if ($urlAdress.text().length < 21) {
+        $urlContents.css({
+            'height': '24px'
+        });
+    };
+  
     $('.box-5-col-1-contents-2 > img').click(() => {
         var $temp = $("<input>");
         $("body").append($temp);
@@ -337,18 +346,20 @@ const showOrFoldRankingText = () => {
             'height': mainStrechedHeight,
         });
     });
-};
+}
 
-// QR 코드를 클릭할 시, 모달로 QR코드 띄우기
-const showQRcodeModal = () => {
+// QR 코드를 클릭할 시, QR코드 보여주기
+const showQRcode = () => {
     const $modal = $('.modal');
+    const $currentSeminarBoxHeight = $('.box-5').css('height').replace('px', '');
 
+    // QR 코드를 클릭할 시, QR코드 보기 또는 접기
     $('.box-qr-code').hide();
     $('.qr-code-fold-button').hide();
 
     $('.qr-code-more-button').click(() => {
         $('.box-5').css({
-            'height': '384px'
+            'height': parseInt($currentSeminarBoxHeight)+176+"px"
         })
         $('.box-qr-code').show();
         $('.qr-code-fold-button').show();
@@ -357,26 +368,27 @@ const showQRcodeModal = () => {
 
     $('.qr-code-fold-button').click(() => {
         $('.box-5').css({
-            'height': '208px'
+            'height': $currentSeminarBoxHeight+"px"
         })
         $('.box-qr-code').hide();
         $('.qr-code-fold-button').hide();
         $('.qr-code-more-button').show();
     });
 
-    $('.box-qr-code').click(() => {
-        $modal.show();
-    });
-    $('.mobile-show-qr-code').click(() => {
-        $modal.show();
-    });
-    $modal.click(() => {
-        $modal.hide();
+    // QR 코드 클릭 시, 모달로 QR 코드 보기 또는 접기
+    $('.box-qr-code').click(() => {	
+        $modal.show();	
+    });	
+    $('.mobile-show-qr-code').click(() => {	
+        $modal.show();	
+    });	
+    $modal.click(() => {	
+        $modal.hide();	
     });
 };
 
 // 웹소켓으로 새 질문 (JSON) 서버로 전달
-const updateNewQuestion = () => {
+const uploadNewQuestion = () => {
     const $inputButton = $('.input-send');
     const $mobileInputButton = $('.mobile-input-send');
     const $newQuestionText = $('textarea');
@@ -396,14 +408,16 @@ const updateNewQuestion = () => {
             sendNewQuestion($newQuestionText);
         }
     });
-        
 };
 
-
-// request QR code (Ajax)
-// <img src="https://api.qrserver.com/v1/create-qr-code/?data=HelloWorld&amp;size=100x100" alt="" title="" />
-// 위에 형식 사용하기 (embed in html and update image src by js)
-
+// shortURL 주소를 QR 코드로 변환하여 표시
+const uploadQRcode = () => {
+    const shortURL = $( ".url-address" ).text();
+    const size = 168;
+    const modalSize = 298;
+    jQuery('#qrcode').qrcode({width: size, height: size, text: shortURL});
+    jQuery('#modalqrcode').qrcode({width: modalSize, height: modalSize, text: shortURL});
+}
 
 // DOM 렌더링이 완료되면, 실행
 $(function () {
@@ -422,15 +436,19 @@ $(function () {
     // 
     if ( currentWidth <= 425 ) {
         $('.question-contents').css( "height", mobileFoldedHeight );
+        $('.box-5-col-1-contents-2').css( "height", '24px' );
     } else {
         $('.question-contents').css( "height", mainFoldedHeight );
     }
 
     // URL 복사 기능
     copyURL();
+
+    // shortURL 주소를 QR 코드로 변환하여 표시
+    uploadQRcode();
     
     // QR 코드 모달로 띄우기 기능
-    showQRcodeModal();
+    showQRcode();
 
     // 랭킹 순위 (Top 3) 질문 공개 및 숨김 기능
     showOrFoldRanking(mainFoldedHeight);
@@ -449,8 +467,8 @@ $(function () {
     connectWebSockets();
 
     // 새 질문 등록
-    updateNewQuestion();
+    uploadNewQuestion();
 
     // like 상태 변경
-    changeLikeState();
+    changeLikeState();   
 });

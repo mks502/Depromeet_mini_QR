@@ -45,7 +45,7 @@ body {
 
 .box-5 {
     width: 200px;
-    height: 208px;
+    height: fit-content;
     border-radius: 5px;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.18);
     background-color: #ffffff;
@@ -101,24 +101,29 @@ body {
     justify-content: space-between;
     margin-top: 8px;
     margin-bottom: 8px;
+    word-break: break-all;
 }
 
 .box-5-col-1 {
-    height: 66px;
+    height: fit-content;
 }
 
 .box-5-col-2 {
-    height: 76px;
+    height: fit-content;
     border-top: 2px solid rgba(112, 112, 112, 0.16);
     border-bottom: 2px solid rgba(112, 112, 112, 0.16);
 }
 
 .url-address {
-    height: 20px;
+    height: fit-content;
 }
 
 .box-5-col-1-contents-2 {
     margin-top: 6px;
+}
+
+.number-of-people {
+    text-align: right;
 }
 
 /* 두번째 열: 질문 랭킹 및 질문 코멘트 로그*/
@@ -410,6 +415,11 @@ span div {
     display: none;
 }
 
+.number-of-people {
+    word-break: keep-all;
+    margin-left: 2px;
+}
+
 .more-rank-1, .more-rank-2, .more-rank-3, .fold-rank-1, .fold-rank-2, .fold-rank-3 {
     opacity: 0.87;
     font-size: 14px;
@@ -422,6 +432,7 @@ span div {
     position: relative;
     bottom: 23px;
     display: none;
+    height: 48px;
 }
 
 .box-qr-code {
@@ -441,6 +452,20 @@ span div {
 
 .show-qr-code-button {
     display: flex;
+}
+
+.url-copy-button {
+    position: relative;
+    bottom: 23px;
+    height: 48px;
+}
+
+.yellow-button:hover, .dark-button:hover, .url-copy-button:hover, .qr-code-more-button:hover, 
+.qr-code-fold-button:hover, .more-rank-1:hover, .more-rank-2:hover, .more-rank-3:hover, 
+.input-send:hover, .mobile-input-send:hover, .box-qr-code:hover, .circle-button:hover, 
+.circle-button-2:hover, .fold-rank-3:hover, .fold-rank-2:hover, .fold-rank-1:hover, ol:hover, 
+.white-star:hover, .one-star:hover {
+    cursor: pointer;
 }
 
 /* 모바일 반응형 스타일 설정 */

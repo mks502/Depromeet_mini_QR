@@ -8,9 +8,10 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
         <!-- Custom Stylesheet & Script -->
         <link rel='stylesheet' type='text/css' href='main.css' />
+        <script src="jquery.qrcode.min.js"></script>
         <script src='main.js' ></script> 
     </head>
-    <body>
+    <body class="">
         <div class="container">
             
             <!-- 세미나 방 정보 표시 -->
@@ -28,7 +29,7 @@
                         <div class="box-5-title-1">세미나 이름</div>
                         <div class="box-5-col-1-contents-1">
                             <div>SeminarRoomDto.seminarTitle</div>
-                            <div>(83명)</div>
+                            <div class="number-of-people">(83명)</div>
                         </div>
                     </div>
                     <!-- URL 정보 표시  -->
@@ -49,7 +50,7 @@
                             <img src="./images/qr-code-fold-button.png" class="qr-code-fold-button" alt="qr-code-fold-button">
                             <img src="./images/qr-code-more-button.png" class="qr-code-more-button" alt="qr-code-more-button">
                         </div>
-                        <img src="./images/qr_code.png" class="box-qr-code" alt="QR code">
+                        <div id="qrcode" class="box-qr-code"></div>
                     </div>
                 </div>
             </div>
@@ -138,9 +139,7 @@
 
             <!-- QR 코드 모덜 -->
             <div class="modal">
-                <div class="modal-content">
-                    <img src="./images/qr_code.png" alt="QR code">
-                </div>
+                <div id="modalqrcode" class="modal-content"></div>
             </div>
         </div>
     </body>
