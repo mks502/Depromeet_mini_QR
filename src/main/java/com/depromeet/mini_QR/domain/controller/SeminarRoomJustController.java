@@ -2,20 +2,21 @@ package com.depromeet.mini_QR.domain.controller;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-
-import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.depromeet.mini_QR.domain.dto.SeminarRoomDto;
+import com.depromeet.mini_QR.domain.entity.Comment;
 import com.depromeet.mini_QR.domain.entity.SeminarRoom;
+import com.depromeet.mini_QR.domain.repository.CommentRepository;
+import com.depromeet.mini_QR.domain.repository.SeminarRoomRepository;
 import com.depromeet.mini_QR.domain.service.SeminarRoomService;
 
 
@@ -24,6 +25,8 @@ import com.depromeet.mini_QR.domain.service.SeminarRoomService;
 public class SeminarRoomJustController {
 	@Autowired
 	SeminarRoomService seminarRoomService;
+	@Autowired
+	CommentRepository commentRepository;
 	
 //	@PostMapping(value = "/create")        //기존 ajax 방식 REST
 //	public SeminarRoomDto setSeminarName(@RequestBody SeminarRoom seminarTitle, HttpServletRequest request) throws MalformedURLException, IOException{
@@ -71,9 +74,14 @@ public class SeminarRoomJustController {
 		if(seminarRoom==null) {
 			return null;
 		}
+		List<Comment> allComments= new ArrayList<Comment>();
+		allComments = commentRepository.findAllBySeminarRoom(seminarRoom.toEntity());
+		
 		mv.addObject("SeminarRoomDto",seminarRoom);
+		mv.addObject("allComments",allComments);
 		mv.setViewName("main");
 		System.out.println("seminarRoom = "+seminarRoom);
+		System.out.println("모든 댓글"+allComments);
 		return mv;
 	}
 }
