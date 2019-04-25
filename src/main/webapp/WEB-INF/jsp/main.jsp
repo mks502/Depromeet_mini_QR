@@ -11,7 +11,8 @@
         <!-- Custom Stylesheet & Script -->
         <link rel='stylesheet' type='text/css' href='<%=request.getContextPath() %>/css/main.css' />
         <script src="<%=request.getContextPath() %>/js/jquery.qrcode.min.js"></script>
-        <script src='<%=request.getContextPath() %>/js/main.js' ></script> 
+        <script src='<%=request.getContextPath() %>/js/main.js' ></script>
+        
     </head>
     <body class="">
         <div class="container">
@@ -20,7 +21,7 @@
             <div class="column-1">
                 <div class="box-5">
                     <div class="mobile-box-5-title-1">
-                        <div>Our Question</div>
+                        <div>Question Ranking</div>
                         <div>
                             <img src="<%=request.getContextPath() %>/images/change-background-color-to-yellow.png" class="yellow-button" alt="Change the background color to yellow">
                             <img src="<%=request.getContextPath() %>/images/change-background-color-to-dark.png" class="dark-button" alt="Change the background color to dark">
@@ -30,7 +31,7 @@
                     <div class="box-5-col-1">
                         <div class="box-5-title-1">세미나 이름</div>
                         <div class="box-5-col-1-contents-1">
-                            <div>${SeminarRoomDto.seminarTitle}</div>
+                            <div>SeminarRoomDto.seminarTitle</div>
                             <div class="number-of-people">(83명)</div>
                         </div>
                     </div>
@@ -39,7 +40,7 @@
                         <div class="box-5-title-2">URL
                         </div>
                         <div class="box-5-col-1-contents-2">
-                            <div class="url-address">${SeminarRoomDto.shortURL}</div>
+                            <div class="url-address">SeminarRoomDto.shortURL</div>
                             <img src="<%=request.getContextPath() %>/images/url_copy_button.png" class="url-copy-button" alt="Copy button of URL">
                             <img src="<%=request.getContextPath() %>/images/Copy_interaction_2.gif" class="url-copy-animation" alt="url copy animation">
                         </div>
@@ -74,7 +75,7 @@
                 <div class="Question-ranking-more">
                     <div class="top-1">
                         <div class="star-and-number">
-                            <img src="<%=request.getContextPath() %>/images/one_star.png" alt="Star symbol">
+                            <img src="<%=request.getContextPath() %>/images/three_star.png" alt="Star symbol">
                             <div>27</div>
                         </div>
                         <div class="ranking-text-rank-1 text-more">이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요?</div>
@@ -83,7 +84,7 @@
                     </div>
                     <div class="top-2">
                         <div class="star-and-number">
-                            <img src="<%=request.getContextPath() %>/images/one_star.png" alt="Star symbol">
+                            <img src="<%=request.getContextPath() %>/images/two_star.png" alt="Star symbol">
                             <div>20</div>
                         </div>
                         <div class="ranking-text-rank-2 text-more">이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요? 이런건 어떤건가요?</div>
@@ -126,7 +127,7 @@
                 <div class="question-input">
                     <textarea type="text" placeholder="질문을 입력해주세요."></textarea>
                     <div class="input-send input-send-dim">Send</div>
-                    <img class="mobile-input-send" src="<%=request.getContextPath() %>/images/mobile-send-button.png" alt="Send button">
+                    <img class="mobile-input-send" src="./images/mobile-send-button.png" alt="Send button">
                 </div>
                 <div id="blank"></div>
             </div>
