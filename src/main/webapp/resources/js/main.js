@@ -100,9 +100,10 @@ const connectWebSockets = () => {
         console.log('소켓 연결되었습니다!');
 
         // 서버로부터 STOMP 메세지를 전달받으면, 콘텐츠 업데이트
-        stompClient.subscribe(`mini_QR//seminar/${seminarId}`, (res) => {
+        stompClient.subscribe(`/subscribe/seminar/${seminarId}`, (res) => {
             // JSON response 파싱
             // const type = JSON.parse(res.body).type;
+        	console.log(res);
 
             // 새 질문 업데이트
             // if (data.type == "comment") {

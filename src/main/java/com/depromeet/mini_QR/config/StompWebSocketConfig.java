@@ -6,9 +6,8 @@ import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBr
 import org.springframework.web.socket.config.annotation.StompEndpointRegistry;
 import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerConfigurer;
 
-
-@EnableWebSocketMessageBroker
 @Configuration
+@EnableWebSocketMessageBroker
 public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer{
 	@Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
@@ -17,7 +16,7 @@ public class StompWebSocketConfig implements WebSocketMessageBrokerConfigurer{
     @Override
     public void configureMessageBroker(MessageBrokerRegistry registry) {
     	registry.setApplicationDestinationPrefixes("/");
-        registry.enableSimpleBroker("/seminar");
+        registry.enableSimpleBroker("/subscribe");
     }
 	
 }
