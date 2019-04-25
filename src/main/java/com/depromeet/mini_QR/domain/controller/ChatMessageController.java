@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import com.depromeet.mini_QR.domain.dto.CommentDto;
+import com.depromeet.mini_QR.domain.dto.CommentSendDto;
 import com.depromeet.mini_QR.domain.entity.Comment;
 import com.depromeet.mini_QR.domain.entity.SeminarRoom;
 import com.depromeet.mini_QR.domain.repository.CommentRepository;
@@ -35,11 +36,14 @@ public class ChatMessageController {
 
     @MessageMapping("/updates")
     public void message(Comment message, @PathVariable Map<String, Object> jsonData) {
+    	
+    	
     	System.out.println("message 전송시작========================================= ");
     	
         
         // message.setSeminarRoom((SeminarRoom)jsonData.get("seminarId"));
         commentService.postComment(message);
+        
         
         //System.out.println("seminarId = "+jsonData.get("seminarId"));
         String id=(String) jsonData.get("seminarId");
@@ -51,12 +55,19 @@ public class ChatMessageController {
         String a=message.getSeminarRoom().getSeminarId().toString();
         System.out.println("Aa"+a);
         
-        this.template.convertAndSend("/subscribe/seminar/"+a, message);
+        CommentSendDto commentSendDto = CommentSendDto.builder()
+        		.type("comment").comment(message)
+        		.build();
+        
+        this.template.convertAndSend("/subscribe/seminar/"+a, commentSendDto);
         
         System.out.println("message = "+message+" "+id);
         
         System.out.println("======================================================= ");
         // @SendTo: /seminar/{seminarId}
     }
+    
+    
+    //public void likeUnlike()
 
 }
