@@ -191,6 +191,8 @@ const enableOrDisableSendButton = () => {
 const postNewQuestion = (message) => {
     const comment = message.comment;
     const commentText = comment.content;
+    const commentId = comment.commentId;
+
     const $ul = $('ul');
     const $inputButton = $('.input-send');
     const $mobileInputButton = $('.mobile-input-send');
