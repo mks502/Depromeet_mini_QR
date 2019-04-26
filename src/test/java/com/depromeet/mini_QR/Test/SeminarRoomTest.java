@@ -15,6 +15,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.depromeet.mini_QR.config.PersistenceJPAConfig;
 import com.depromeet.mini_QR.config.WebConfig;
 import com.depromeet.mini_QR.domain.dto.CommentSendDto;
+import com.depromeet.mini_QR.domain.dto.RankingSendDto;
 import com.depromeet.mini_QR.domain.dto.SeminarRoomDto;
 import com.depromeet.mini_QR.domain.entity.Comment;
 import com.depromeet.mini_QR.domain.entity.SeminarRoom;
@@ -43,7 +44,7 @@ public class SeminarRoomTest {
 	public void test() {
 
 		SeminarRoom seminarRoom = SeminarRoom.builder()
-				.seminarId((long) 2)
+				.seminarId((long) 13)
 				.build();
 
 		// System.out.println(cr.findTop3BySeminarRoomOrderByLikeCountDesc(seminarRoom).size());
@@ -51,13 +52,12 @@ public class SeminarRoomTest {
 		List<Comment> commentList = cr
 				.findTop3BySeminarRoomOrderByLikeCountDesc(seminarRoom);
 
-		// List를 Comment로 변환할 수 없어 캐스팅 에러가 남 
-		CommentSendDto commentSendDto = CommentSendDto.builder()
+		RankingSendDto rankingSendDto = RankingSendDto.builder()
 				.type("ranking")
-				.comment((Comment)commentList)
+				.commentList(commentList)
 				.build();
 		
-		System.out.println("commentSendDto = "+commentSendDto);
+		System.out.println("rankingSendDto = "+rankingSendDto);
 	}
 
 }

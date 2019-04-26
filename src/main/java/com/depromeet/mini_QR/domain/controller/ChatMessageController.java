@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.depromeet.mini_QR.domain.dto.CommentDto;
 import com.depromeet.mini_QR.domain.dto.CommentSendDto;
+import com.depromeet.mini_QR.domain.dto.RankingSendDto;
 import com.depromeet.mini_QR.domain.dto.SeminarRoomDto;
 import com.depromeet.mini_QR.domain.entity.Comment;
 import com.depromeet.mini_QR.domain.entity.SeminarRoom;
@@ -136,9 +137,10 @@ public class ChatMessageController {
         // @SendTo: /seminar/{seminarId}
     }
     
-    
+    ////  완료!!!!!
     public void getCommentRanking(Long seminarId) {
-    	seminarId = (long) 10;
+    	////절대값 수정해주세요
+    	seminarId = (long) 13;
     		
     	SeminarRoomDto seminarRoomDto = SeminarRoomDto.builder()
     			.seminarId(seminarId)
@@ -146,11 +148,11 @@ public class ChatMessageController {
     	
     	List<Comment> commentList = commentRepository.findTop3BySeminarRoomOrderByLikeCountDesc(seminarRoomDto.toEntity());
     	
-    	CommentSendDto commentSendDto = CommentSendDto.builder()
-        		.type("ranking").comment((Comment) commentList)
+    	RankingSendDto rankingSendDto = RankingSendDto.builder()
+        		.type("ranking").commentList(commentList)
         		.build();
     	
-    	System.out.println();
+    	System.out.println(rankingSendDto);
     	
     }
 
