@@ -119,7 +119,16 @@
 
                     <!-- 질문 코멘트 로그 -->
                     <ul>
-
+                        <!-- allComments 리스트를 받아 질문 코멘트 출력 -->
+                        <c:forEach items="${allComments}" var="comment">
+                            <div data-commentId='<c:out value="${comment.commentId}"/>'>
+                                <ol><c:out value="${comment.content}"/></ol>
+                                <span>
+                                    <img src="<%=request.getContextPath() %>/images/one_star.png" class="white-star yellow-star" alt="Button to recommend questions">
+                                    <div><c:out value="${comment.likeCount}"/></div>
+                                </span>
+                            </div>
+                        </c:forEach>
                     </ul>
                 </div>
 
