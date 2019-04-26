@@ -24,6 +24,7 @@ const addChangeLike = (star) => {
             $starImg.toggleClass('yellow-star');
 
             // 웹소켓을 통해 서버로 like 상태 변경 전달
+            console.log("like 합니다: ", message);
             stompClient.send("/like", {}, message);
         } 
         // unlike를 선택했을 경우,
@@ -33,6 +34,7 @@ const addChangeLike = (star) => {
             $starImg.toggleClass('yellow-star');
 
             // 웹소켓을 통해 서버로 like 상태 변경 전달
+            console.log("unlike 합니다: ", message);
             stompClient.send("/unlike", {}, message);
         }
     });
