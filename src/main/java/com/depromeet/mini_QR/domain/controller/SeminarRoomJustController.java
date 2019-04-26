@@ -90,6 +90,7 @@ public class SeminarRoomJustController {
 		System.out.println("seminarRoom = "+seminarRoom);
 		System.out.println("모든 댓글"+allComments);
 		System.out.println("랭킹 리스트 = "+rankingSendDto);
+		System.out.println("mv= "+mv);
 		return mv;
 	}
 }

@@ -148,9 +148,11 @@ public class ChatMessageController {
     	
     	List<Comment> commentList = commentRepository.findTop3BySeminarRoomOrderByLikeCountDesc(seminarRoomDto.toEntity());
     	
+    	
     	RankingSendDto rankingSendDto = RankingSendDto.builder()
         		.type("ranking").commentList(commentList)
         		.build();
+    	
     	
     	System.out.println(rankingSendDto);
     	
