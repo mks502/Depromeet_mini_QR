@@ -74,27 +74,27 @@
                     <div class="top-1">
                         <div class="star-and-number">
                             <img src="<%=request.getContextPath() %>/images/one_star.png" alt="Star symbol">
-                            <div>${rankingSendDto[0].likes}</div>
+                            <div>${RankingSendDto[0].likeCount}</div>
                         </div>
-                        <div class="ranking-text-rank-1 text-more">${rankingSendDto[0].content}</div>
+                        <div class="ranking-text-rank-1 text-more">${RankingSendDto[0].content}</div>
                         <span class="more-rank-1">More</span>
                         <span class="fold-rank-1">Fold</span>
                     </div>
                     <div class="top-2">
                         <div class="star-and-number">
                             <img src="<%=request.getContextPath() %>/images/one_star.png" alt="Star symbol">
-                            <div>${rankingSendDto[1].likes}</div>
+                            <div>${RankingSendDto[1].likeCount}</div>
                         </div>
-                        <div class="ranking-text-rank-2 text-more">${rankingSendDto[1].content}</div>
+                        <div class="ranking-text-rank-2 text-more">${RankingSendDto[1].content}</div>
                         <span class="more-rank-2">More</span>
                         <span class="fold-rank-2">Fold</span>
                     </div>
                     <div class="top-3">
                         <div class="star-and-number">
                             <img src="<%=request.getContextPath() %>/images/one_star.png" alt="Star symbol">
-                            <div>${rankingSendDto[2].likes}</div>
+                            <div>${RankingSendDto[2].likeCount}</div>
                         </div>
-                        <div class="ranking-text-rank-3 text-more">${rankingSendDto[2].content}</div>
+                        <div class="ranking-text-rank-3 text-more">${RankingSendDto[2].content}</div>
                         <span class="more-rank-3">More</span>
                         <span class="fold-rank-3">Fold</span>
                     </div>
