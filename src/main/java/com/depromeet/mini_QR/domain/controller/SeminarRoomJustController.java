@@ -12,11 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.depromeet.mini_QR.domain.dto.RankingSendDto;
 import com.depromeet.mini_QR.domain.dto.SeminarRoomDto;
 import com.depromeet.mini_QR.domain.entity.Comment;
 import com.depromeet.mini_QR.domain.entity.SeminarRoom;
 import com.depromeet.mini_QR.domain.repository.CommentRepository;
-import com.depromeet.mini_QR.domain.repository.SeminarRoomRepository;
 import com.depromeet.mini_QR.domain.service.SeminarRoomService;
 
 
@@ -77,11 +77,19 @@ public class SeminarRoomJustController {
 		List<Comment> allComments= new ArrayList<Comment>();
 		allComments = commentRepository.findAllBySeminarRoom(seminarRoom.toEntity());
 		
+		List<Comment> rankingList = commentRepository.findTop3BySeminarRoomOrderByLikeCountDesc(seminarRoom.toEntity());
+		RankingSendDto rankingSendDto = RankingSendDto.builder()
+        		.type("ranking").commentList(rankingList)
+        		.build();
+		
+		
 		mv.addObject("SeminarRoomDto",seminarRoom);
 		mv.addObject("allComments",allComments);
+		mv.addObject("rankingList", rankingSendDto);
 		mv.setViewName("main");
 		System.out.println("seminarRoom = "+seminarRoom);
 		System.out.println("모든 댓글"+allComments);
+		System.out.println("랭킹 리스트 = "+rankingSendDto);
 		return mv;
 	}
 }
