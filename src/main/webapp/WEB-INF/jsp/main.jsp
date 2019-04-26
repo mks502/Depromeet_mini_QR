@@ -119,7 +119,6 @@
 
                     <!-- 질문 코멘트 로그 -->
                     <ul>
-<<<<<<< HEAD
                         <!-- allComments 리스트를 받아 질문 코멘트 출력 -->
                         <c:forEach items="${allComments}" var="comment">
                             <div data-commentId='<c:out value="${comment.commentId}"/>'>
@@ -130,8 +129,6 @@
                                 </span>
                             </div>
                         </c:forEach>
-=======
->>>>>>> 06dc5c201912edc337abf81301c61e96c7188abb
                     </ul>
                 </div>
 
