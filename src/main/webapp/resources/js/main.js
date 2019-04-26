@@ -189,8 +189,8 @@ const enableOrDisableSendButton = () => {
 
 // 새 질문 업데이트
 const postNewQuestion = (message) => {
-    console.log("새 질문 올립니다")
-    const commentText = message.content;
+    const comment = message.comment;
+    const commentText = comment.content;
     const $ul = $('ul');
     const $inputButton = $('.input-send');
     const $mobileInputButton = $('.mobile-input-send');
