@@ -1,3 +1,8 @@
+// 웹 소켓 기본 설정
+let stompClient = null;
+let paths = window.location.pathname.split("/");
+let seminarId = paths[paths.length - 1];
+
 // 색깔 버튼 클릭 시, 배경 색깔 변경
 const changeBackgroundColor = () => {
     const $yellowButton = $('.yellow-button');
@@ -69,59 +74,66 @@ const addChangeLike = (star, likes) => {
     const $starImg = star;
     let counterLikedNumber = likes;
 
-    // 웹소켓을 통해 서버로 like 상태 변경 전달
-
     // like 개수 변경 부분만 웹소켓 subscribe으로 옮기기
     
     // like를 의미하는 별 아이콘 클릭 시, 색깔 변경 및 like 개수 업데이트
     $starImg.click(() => {
         if ($starImg.hasClass('yellow-star')) {
-            $starImg.attr('src', '<%=request.getContextPath() %>/images/Star_interaction_' + Math.floor(Math.random() * 6) + '.gif');
+            $starImg.attr('src', '/mini_QR/images/Star_interaction_' + Math.floor(Math.random() * 6) + '.gif');
             setTimeout(() => {
-                $starImg.attr('src', '<%=request.getContextPath() %>/images/one_star.png');
+                $starImg.attr('src', '/mini_QR/images/one_star.png');
             }, 2800);
             $starImg.toggleClass('yellow-star');
             counterLikedNumber++;
             $starImg.next().text(counterLikedNumber);
         } else {
-            $starImg.attr('src', '<%=request.getContextPath() %>/images/white-star.png');
+            $starImg.attr('src', '/mini_QR/images/white-star.png');
             $starImg.toggleClass('yellow-star');
             counterLikedNumber--;
             $starImg.next().text(counterLikedNumber);
         }
+
+        // 웹소켓을 통해 서버로 like 상태 변경 전달
+        const commentId = 12;
+        const message = JSON.stringify({'seminarId': seminarId, 'commentId': commentId});
+        console.log("데이터 전송합니다: ", message);
+        stompClient.send("/updates", {}, message);
     });
 };
 
-// 웹 소켓 기본 설정
-let stompClient = null;
-let paths = window.location.pathname.split("/");
-let seminarId = paths[paths.length - 1];
-
+// 웹소켓 연결하기
 const connectWebSockets = () => {
     let socket = new SockJS('/mini_QR/q-rank-websock');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, (frame) => {
         console.log('소켓 연결되었습니다!');
 
-        // 서버로부터 STOMP 메세지를 전달받으면, 콘텐츠 업데이트
+        // 서버로부터 STOMP 메세지를 전달받으면, 새 질문 업데이트
         stompClient.subscribe(`/subscribe/seminar/${seminarId}`, (res) => {
 
             console.log("메세지 도착: ", res);
             // JSON response 파싱
             const data = JSON.parse(res.body);
             console.log("메세지 파싱: ", data);
-
-            // 새 질문 업데이트
-            if (data.type === "comment") {
-                postNewQuestion(data);
-            // 좋아요 숫자 업데이트
-            } else if (data.type === "likes") {}
-
-            // 랭킹순위 업데이트
-            // if (data.type == "ranking") {
-            // 랭킹 순위 content와 like 수 바로 변경       }
-            // html/jsp 파일 랭킹 순위에 있는 contents와 like 수 default로 설정
+            postNewQuestion(data);
+            
         });
+
+        // 서버로부터 like 업데이트 STOMP 메세지를 전달받으면,
+        stompClient.subscribe('/like', (res) => { 
+            console.log("like 업데이트: ", res);
+            // 
+        });
+
+        // 서버로부터 like 업데이트 STOMP 메세지를 전달받으면,
+        stompClient.subscribe('/unlike', (res) => { 
+            console.log("unlike 업데이트: ", res);
+            // 
+        });
+
+        // 랭킹 순위 content와 like 수 바로 변경       }
+        // html/jsp 파일 랭킹 순위에 있는 contents와 like 수 default로 설정
+
     });
 };
 
@@ -184,7 +196,7 @@ const postNewQuestion = (message) => {
     // 새 질문 올리기
     $ul.append('<div><ol></ol><span></span></div>');
     $('ol:last').append(commentText);
-    $('span:last').append('<img src="<%=request.getContextPath() %>/images/white-star.png" class="yellow-star" alt="Button to recommend questions"><div>0</div>')
+    $('span:last').append('<img src="/mini_QR/images/white-star.png" class="yellow-star" alt="Button to recommend questions"><div>0</div>')
     $('span:last > img').addClass('white-star');
     $('span:last > div').addClass($('body').attr('class'));
 
@@ -274,87 +286,96 @@ const showOrFoldRankingMobile = (foldedHeight, strechedHeight) => {
 const showOrFoldRankingText = () => {
 
     const currentHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const currentWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
-    for (var i = 0; i < 4; i++) {
-        if ($('.ranking-text-rank-'+i).text().length < 172) {
-            $('.more-rank-'+i).hide();
+    function mainShowOrFoldRankingText(questionRankingOthersHeight, toOmissionTextLength) {
+        for (var i = 0; i < 4; i++) {
+            if ($('.ranking-text-rank-'+i).text().length < toOmissionTextLength) {
+                $('.more-rank-'+i).hide();
+            }
         }
-    }
-    
-    $('.fold-rank-'+1).hide();
-
-    $('.more-rank-'+1).click(() => {
-        $('.ranking-text-rank-'+1).removeClass('text-more');
-        $('.more-rank-'+1).hide();
-        $('.fold-rank-'+1).show();
         
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
-        });
-    });
-    $('.fold-rank-'+1).click(() => {
-        $('.ranking-text-rank-'+1).addClass('text-more');
-        $('.more-rank-'+1).show();
         $('.fold-rank-'+1).hide();
-
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
+    
+        $('.more-rank-'+1).click(() => {
+            $('.ranking-text-rank-'+1).removeClass('text-more');
+            $('.more-rank-'+1).hide();
+            $('.fold-rank-'+1).show();
+            
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
         });
-    });
-
-    $('.fold-rank-'+2).hide();
-
-    $('.more-rank-'+2).click(() => {
-        $('.ranking-text-rank-'+2).removeClass('text-more');
-        $('.more-rank-'+2).hide();
-        $('.fold-rank-'+2).show();
-
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
+        $('.fold-rank-'+1).click(() => {
+            $('.ranking-text-rank-'+1).addClass('text-more');
+            $('.more-rank-'+1).show();
+            $('.fold-rank-'+1).hide();
+    
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
         });
-    });
-    $('.fold-rank-'+2).click(() => {
-        $('.ranking-text-rank-'+2).addClass('text-more');
-        $('.more-rank-'+2).show();
+    
         $('.fold-rank-'+2).hide();
-
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
+    
+        $('.more-rank-'+2).click(() => {
+            $('.ranking-text-rank-'+2).removeClass('text-more');
+            $('.more-rank-'+2).hide();
+            $('.fold-rank-'+2).show();
+    
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
         });
-    });
-
-    $('.fold-rank-'+3).hide();
-
-    $('.more-rank-'+3).click(() => {
-        $('.ranking-text-rank-'+3).removeClass('text-more');
-        $('.more-rank-'+3).hide();
-        $('.fold-rank-'+3).show();
-
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
+        $('.fold-rank-'+2).click(() => {
+            $('.ranking-text-rank-'+2).addClass('text-more');
+            $('.more-rank-'+2).show();
+            $('.fold-rank-'+2).hide();
+    
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
         });
-    });
-    $('.fold-rank-'+3).click(() => {
-        $('.ranking-text-rank-'+3).addClass('text-more');
-        $('.more-rank-'+3).show();
+    
         $('.fold-rank-'+3).hide();
-
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
+    
+        $('.more-rank-'+3).click(() => {
+            $('.ranking-text-rank-'+3).removeClass('text-more');
+            $('.more-rank-'+3).hide();
+            $('.fold-rank-'+3).show();
+    
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
         });
-    });
+        $('.fold-rank-'+3).click(() => {
+            $('.ranking-text-rank-'+3).addClass('text-more');
+            $('.more-rank-'+3).show();
+            $('.fold-rank-'+3).hide();
+    
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
+        });
+    }
+
+    if ( currentWidth > 425 ) {
+        mainShowOrFoldRankingText(172, 172);
+    } else {
+        mainShowOrFoldRankingText(50, 42);
+    }
 }
 
 // QR 코드를 클릭할 시, QR코드 보여주기
