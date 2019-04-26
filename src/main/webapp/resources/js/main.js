@@ -202,7 +202,7 @@ const postNewQuestion = (message) => {
     // 새 질문 올리기
     $ul.append(`<div data-commentId=${commentId}><ol></ol><span class="comment-likes"></span></div>`);
     $('ol:last').append(commentText);
-    $('span:last').append('<img src="/mini_QR//images/white-star.png" class="yellow-star" alt="Button to recommend questions"><div>0</div>')
+    $('span:last').append('<img src="/mini_QR/images/white-star.png" class="yellow-star" alt="Button to recommend questions"><div>0</div>')
     $('span:last > img').addClass('white-star');
     $('span:last > div').addClass($('body').attr('class'));
 
