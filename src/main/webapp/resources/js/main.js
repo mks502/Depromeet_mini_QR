@@ -9,10 +9,17 @@ const addChangeLike = (star, likes) => {
     let counterLikedNumber = likes;
 
     // like 개수 변경 부분만 웹소켓 subscribe으로 옮기기
+
+    // 웹소켓을 통해 서버로 보낼 JSON 메세지 작성
+    const commentDiv = $starImg.parent().parent();
+    const commentId = data('commentId');
+    const message = JSON.stringify({'seminarId': seminarId, 'commentId': commentId});
     
     // like를 의미하는 별 아이콘 클릭 시, 색깔 변경 및 like 개수 업데이트
     $starImg.click(() => {
+        // like를 선택했을 경우,
         if ($starImg.hasClass('yellow-star')) {
+            // 인터랙션 실행
             $starImg.attr('src', '/mini_QR/images/Star_interaction_' + Math.floor(Math.random() * 6) + '.gif');
             setTimeout(() => {
                 $starImg.attr('src', '/mini_QR/images/one_star.png');
@@ -20,18 +27,21 @@ const addChangeLike = (star, likes) => {
             $starImg.toggleClass('yellow-star');
             counterLikedNumber++;
             $starImg.next().text(counterLikedNumber);
-        } else {
+
+            // 웹소켓을 통해 서버로 like 상태 변경 전달
+            stompClient.send("/like", {}, message);
+        } 
+        // unlike를 선택했을 경우,
+        else {
+            // 인터랙션 실행
             $starImg.attr('src', '/mini_QR/images/white-star.png');
             $starImg.toggleClass('yellow-star');
             counterLikedNumber--;
             $starImg.next().text(counterLikedNumber);
-        }
 
-        // 웹소켓을 통해 서버로 like 상태 변경 전달
-        const commentId = 12;
-        const message = JSON.stringify({'seminarId': seminarId, 'commentId': commentId});
-        console.log("데이터 전송합니다: ", message);
-        stompClient.send("/updates", {}, message);
+            // 웹소켓을 통해 서버로 like 상태 변경 전달
+            stompClient.send("/unlike", {}, message);
+        }
     });
 };
 
