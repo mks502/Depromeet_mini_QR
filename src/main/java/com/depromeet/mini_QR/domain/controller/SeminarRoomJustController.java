@@ -78,18 +78,18 @@ public class SeminarRoomJustController {
 		allComments = commentRepository.findAllBySeminarRoom(seminarRoom.toEntity());
 		
 		List<Comment> rankingList = commentRepository.findTop3BySeminarRoomOrderByLikeCountDesc(seminarRoom.toEntity());
-		RankingSendDto rankingSendDto = RankingSendDto.builder()
-        		.type("ranking").commentList(rankingList)
-        		.build();
+//		RankingSendDto rankingSendDto = RankingSendDto.builder()
+//        		.type("ranking").commentList(rankingList)
+//        		.build();
 		
 		
 		mv.addObject("SeminarRoomDto",seminarRoom);
 		mv.addObject("allComments",allComments);
-		mv.addObject("rankingList", rankingSendDto);
+		mv.addObject("rankingList", rankingList);
 		mv.setViewName("main");
 		System.out.println("seminarRoom = "+seminarRoom);
 		System.out.println("모든 댓글"+allComments);
-		System.out.println("랭킹 리스트 = "+rankingSendDto);
+		System.out.println("랭킹 리스트 = "+rankingList);
 		return mv;
 	}
 }
