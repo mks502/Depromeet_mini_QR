@@ -4,11 +4,8 @@ let paths = window.location.pathname.split("/");
 let seminarId = paths[paths.length - 1];
 
 // 별 아이콘에 색깔 변경 및 like 개수 변경 기능 추가
-const addChangeLike = (star, likes) => {
+const addChangeLike = (star) => {
     const $starImg = star;
-    let counterLikedNumber = likes;
-
-    // like 개수 변경 부분만 웹소켓 subscribe으로 옮기기
 
     // 웹소켓을 통해 서버로 보낼 JSON 메세지 작성
     const commentDiv = $starImg.parent().parent();
@@ -25,8 +22,6 @@ const addChangeLike = (star, likes) => {
                 $starImg.attr('src', '/mini_QR/images/one_star.png');
             }, 2800);
             $starImg.toggleClass('yellow-star');
-            counterLikedNumber++;
-            $starImg.next().text(counterLikedNumber);
 
             // 웹소켓을 통해 서버로 like 상태 변경 전달
             stompClient.send("/like", {}, message);
@@ -36,8 +31,6 @@ const addChangeLike = (star, likes) => {
             // 인터랙션 실행
             $starImg.attr('src', '/mini_QR/images/white-star.png');
             $starImg.toggleClass('yellow-star');
-            counterLikedNumber--;
-            $starImg.next().text(counterLikedNumber);
 
             // 웹소켓을 통해 서버로 like 상태 변경 전달
             stompClient.send("/unlike", {}, message);
@@ -216,7 +209,7 @@ const postNewQuestion = (message) => {
 
     // like 별 아이콘 상태 변경 기능 추가
     const $img = $('span:last > img');
-    addChangeLike($img, 0);
+    addChangeLike($img);
 };
 
 // 웹소켓을 통해 서버에게 새 질문 전달
@@ -484,11 +477,9 @@ $(function () {
     
     const $likeList = $('.comment-likes');
     $likeList.each(function() {
-        const $img = $(this).find('img')
-        const likeNum = $(this).find('div').text();
-        addChangeLike($img, likeNum);
+        const $img = $(this).find('img')  
+        addChangeLike($img);
     });
-    
 
     // URL 복사 기능
     copyURL();
