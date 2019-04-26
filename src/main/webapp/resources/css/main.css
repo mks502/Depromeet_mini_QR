@@ -658,4 +658,9 @@ span div {
         background-color: #feb71a;
         border-radius: 100%;
     }
+    
+    .modal-content canvas {
+        width: 215px;
+        height: 215px;
+    }
 }
