@@ -132,7 +132,7 @@ const connectWebSockets = () => {
             }
             // 메세지가 랭킹 업데이트면,
             else if (data.type === "ranking") {
-                console.log("ranking");
+                updateRanking(data);
             }
         });
     });
@@ -417,6 +417,23 @@ const updateLikeCount = (message) => {
     const comment = document.querySelector(`[data-commentId="${commentId}"]`);
     const likeDiv = comment.lastElementChild.lastElementChild;
     likeDiv.textContent = likeCount;
+}
+
+// 웹소켓으로 받은 랭킹 순위 업데이트
+const updateRanking = (message) => {
+    const commentList = message.commentList;
+    const likeNumDivList = document.querySelectorAll(".star-and-number");
+
+    // 랭킹 리스트에 포함된 질문 업데이트
+    commentList.forEach((comment, i) => {
+        // 질문 콘텐츠 업데이트 
+        const commentDiv = document.querySelector(`.ranking-text-rank-${i + 1}`);
+        commentDiv.textContent = comment.content;
+
+        // 질문 like 개수 업데이트
+        const likeNumDiv = likeNumDivList[i].lastElementChild;
+        likeNumDiv.textContent = comment.likeCount;
+    });
 }
 
 // 웹소켓으로 새 질문 (JSON) 서버로 전달
