@@ -127,16 +127,20 @@ const connectWebSockets = () => {
             const data = JSON.parse(res.body);
             console.log("메세지 파싱: ", data);
 
-            // 새 질문 업데이트
+            // 메세지가 종류가 새 질문 업데이트이면, 
             if (data.type === "comment") {
+                // 새 질문 화면에 표시
                 postNewQuestion(data);
-            // 좋아요 숫자 업데이트
-            } else if (data.type === "likes") {}
-
-            // 랭킹순위 업데이트
-            // if (data.type == "ranking") {
-            // 랭킹 순위 content와 like 수 바로 변경       }
-            // html/jsp 파일 랭킹 순위에 있는 contents와 like 수 default로 설정
+            } 
+            // 메세지가 like로 상태 업데이트면,
+            else if (data.type === "like" || data.type === "unlike") {
+                // 해당 질문의 like 개수 변경
+                updateLikeCount(data);
+            }
+            // 메세지가 랭킹 업데이트면,
+            else if (data.type === "ranking") {
+                console.log("ranking");
+            }
         });
     });
 };
@@ -411,6 +415,16 @@ const showQRcode = () => {
         $modal.hide();	
     });
 };
+
+// 웹소켓으로 받은 like 개수를 업데이트
+const updateLikeCount = (message) => {
+    const commentId = message.comment.commentId;
+    const likeCount = message.comment.likeCount;
+
+    const comment = document.querySelector(`[data-commentId="${commentId}"]`);
+    const likeDiv = comment.lastElementChild.lastElementChild;
+    likeDiv.textContent = likeCount;
+}
 
 // 웹소켓으로 새 질문 (JSON) 서버로 전달
 const uploadNewQuestion = () => {
