@@ -8,9 +8,9 @@ const addChangeLike = (star) => {
     const $starImg = star;
 
     // 웹소켓을 통해 서버로 보낼 JSON 메세지 작성
-    const $commentDiv = $starImg.parent().find('div');
-    const commentId = $commentDiv.text();
-    const message = JSON.stringify({'seminarId': seminarId, 'commentId': commentId});
+    const $commentDiv = $starImg.parent().parent();
+    const $commentId = $commentDiv[0].dataset.commentid;
+    const message = JSON.stringify({'seminarId': seminarId, 'commentId': $commentId});
     
     // like를 의미하는 별 아이콘 클릭 시, 색깔 변경 및 like 개수 업데이트
     $starImg.click(() => {
@@ -498,7 +498,6 @@ $(function () {
     }
 
     // 모든 메세지 별 아이콘에 업데이트 기능 추가
-    
     const $likeList = $('.comment-likes');
     $likeList.each(function() {
         const $img = $(this).find('img')  
