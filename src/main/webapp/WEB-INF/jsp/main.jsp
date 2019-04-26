@@ -124,7 +124,7 @@
                             <div data-commentId='<c:out value="${comment.commentId}"/>'>
                                 <ol><c:out value="${comment.content}"/></ol>
                                 <span class="comment-likes">
-                                    <img src="<%=request.getContextPath() %>/images/one_star.png" class="white-star yellow-star" alt="Button to recommend questions">
+                                    <img src="<%=request.getContextPath() %>/images/white-star.png" class="yellow-star" alt="Button to recommend questions">
                                     <div><c:out value="${comment.likeCount}"/></div>
                                 </span>
                             </div>
