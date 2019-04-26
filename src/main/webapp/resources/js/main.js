@@ -111,12 +111,12 @@ const connectWebSockets = () => {
         // 서버로부터 STOMP 메세지를 전달받으면, 새 질문 업데이트
         stompClient.subscribe(`/subscribe/seminar/${seminarId}`, (res) => {
 
-            console.log("메세지 도착: ", res);
             // JSON response 파싱
             const data = JSON.parse(res.body);
             console.log("메세지 파싱: ", data);
+
+            // 새 질문 화면에 표시
             postNewQuestion(data);
-            
         });
 
         // 서버로부터 like 업데이트 STOMP 메세지를 전달받으면,
@@ -186,7 +186,10 @@ const enableOrDisableSendButton = () => {
 // 새 질문 업데이트
 const postNewQuestion = (message) => {
     console.log("새 질문 올립니다")
-    const commentText = message.content;
+    const comment = message.comment;
+    const commentText = comment.content;
+    const commentId = comment.commentId;
+
     const $ul = $('ul');
     const $inputButton = $('.input-send');
     const $mobileInputButton = $('.mobile-input-send');
@@ -194,7 +197,7 @@ const postNewQuestion = (message) => {
     const $textarea = $('textarea');
 
     // 새 질문 올리기
-    $ul.append('<div><ol></ol><span></span></div>');
+    $ul.append(`<div data-commentId=${commentId}><ol></ol><span></span></div>`);
     $('ol:last').append(commentText);
     $('span:last').append('<img src="/mini_QR/images/white-star.png" class="yellow-star" alt="Button to recommend questions"><div>0</div>')
     $('span:last > img').addClass('white-star');
