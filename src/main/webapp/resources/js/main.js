@@ -123,15 +123,18 @@ const connectWebSockets = () => {
             // 메세지가 종류가 새 질문 업데이트이면, 
             if (data.type === "comment") {
                 // 새 질문 화면에 표시
+                console.log("질문을 업데이트...")
                 postNewQuestion(data);
             } 
             // 메세지가 like로 상태 업데이트면,
             else if (data.type === "like" || data.type === "unlike") {
                 // 해당 질문의 like 개수 변경
+                console.log("like 개수를 업데이트...")
                 updateLikeCount(data);
             }
             // 메세지가 랭킹 업데이트면,
             else if (data.type === "ranking") {
+                console.log("랭킹 순위 업데이트...")
                 updateRanking(data);
             }
         });
