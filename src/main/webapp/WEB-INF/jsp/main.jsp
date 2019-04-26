@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html>
     <head>
@@ -31,7 +32,6 @@
                         <div class="box-5-title-1">세미나 이름</div>
                         <div class="box-5-col-1-contents-1">
                             <div>${SeminarRoomDto.seminarTitle}</div>
-                            <div class="number-of-people">(83명)</div>
                         </div>
                     </div>
                     <!-- URL 정보 표시  -->
@@ -119,6 +119,7 @@
 
                     <!-- 질문 코멘트 로그 -->
                     <ul>
+
                     </ul>
                 </div>
 
