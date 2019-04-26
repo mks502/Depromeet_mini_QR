@@ -237,7 +237,7 @@ const showOrFoldRanking = (foldedHeight) => {
     $foldButton.hide();
 
     if ($('.ranking-text-rank-1').text() === '') {
-        $('.circle-button').attr('src', '<%=request.getContextPath() %>/images/more-button-dim.png');
+        $('.circle-button').attr('src', '/mini_QR/images/more-button-dim.png');
     } else {
         $moreButton.click(() => {
             $questionRanking.hide();
@@ -268,7 +268,7 @@ const showOrFoldRankingMobile = (foldedHeight, strechedHeight) => {
     const $secondCircleButton = $('.mobile-circle-button-2')
 
     if ($('.ranking-text-rank-1').text() === '') {
-        $('.mobile-circle-button').attr('src', '<%=request.getContextPath() %>/images/more-button-dim.png');
+        $('.mobile-circle-button').attr('src', '/mini_QR/images/more-button-dim.png');
     } else {
         $circleButton.click(() => {
             $questionRanking.hide();
