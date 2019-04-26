@@ -139,7 +139,7 @@ public class ChatMessageController {
     
     ////  완료!!!!!
     public void getCommentRanking(Long seminarId) {
-    	////절대값 수정해주세요
+    	////절대값 수정해주세요 :)
     	seminarId = (long) 13;
     		
     	SeminarRoomDto seminarRoomDto = SeminarRoomDto.builder()
