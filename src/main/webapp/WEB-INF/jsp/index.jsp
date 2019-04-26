@@ -8,7 +8,7 @@
         <title></title>
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-        <link rel='stylesheet' type='text/css' href='<%=request.getContextPath()%>/css/index.css' />
+        <link rel='stylesheet' type='text/css' href='<%=request.getContextPath()%>/css/style.css' />
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <script src="<%=request.getContextPath() %>/js/index.js" ></script> 
 
