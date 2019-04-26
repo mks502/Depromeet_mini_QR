@@ -12,7 +12,7 @@ const addChangeLike = (star, likes) => {
 
     // 웹소켓을 통해 서버로 보낼 JSON 메세지 작성
     const commentDiv = $starImg.parent().parent();
-    const commentId = data('commentId');
+    const commentId = commentDiv.data('commentId');
     const message = JSON.stringify({'seminarId': seminarId, 'commentId': commentId});
     
     // like를 의미하는 별 아이콘 클릭 시, 색깔 변경 및 like 개수 업데이트
