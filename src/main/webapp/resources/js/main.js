@@ -108,32 +108,32 @@ const connectWebSockets = () => {
     stompClient.connect({}, (frame) => {
         console.log('소켓 연결되었습니다!');
 
-        // 서버로부터 STOMP 메세지를 전달받으면, 새 질문 업데이트
+        // 서버로부터 STOMP 메세지를 전달받으면,
         stompClient.subscribe(`/subscribe/seminar/${seminarId}`, (res) => {
 
             // JSON response 파싱
             const data = JSON.parse(res.body);
             console.log("메세지 파싱: ", data);
 
-            // 새 질문 화면에 표시
-            postNewQuestion(data);
+            // 메세지가 종류가 새 질문 업데이트이면, 
+            if (data.type === "comment") {
+                // 새 질문 화면에 표시
+                postNewQuestion(data);
+            } 
+            // 메세지가 like로 상태 업데이트면,
+            else if (data.type === "like") {
+                console.log("like");
+            }
+            // 메세지가 unlike로 상태 업데이트면,
+            else if (data.type === "unlike") {
+                console.log("unlike");
+            }
+            // 메세지가 랭킹 업데이트면,
+            else if (data.type === "ranking") {
+                console.log("ranking");
+            }
+            
         });
-
-        // 서버로부터 like 업데이트 STOMP 메세지를 전달받으면,
-        stompClient.subscribe('/like', (res) => { 
-            console.log("like 업데이트: ", res);
-            // 
-        });
-
-        // 서버로부터 like 업데이트 STOMP 메세지를 전달받으면,
-        stompClient.subscribe('/unlike', (res) => { 
-            console.log("unlike 업데이트: ", res);
-            // 
-        });
-
-        // 랭킹 순위 content와 like 수 바로 변경       }
-        // html/jsp 파일 랭킹 순위에 있는 contents와 like 수 default로 설정
-
     });
 };
 
@@ -186,10 +186,12 @@ const enableOrDisableSendButton = () => {
 // 새 질문 업데이트
 const postNewQuestion = (message) => {
     console.log("새 질문 올립니다")
+    // 메세지로 받은 데이터 파싱
     const comment = message.comment;
     const commentText = comment.content;
     const commentId = comment.commentId;
 
+    // 인터랙션 리셋 위한 변수 선언
     const $ul = $('ul');
     const $inputButton = $('.input-send');
     const $mobileInputButton = $('.mobile-input-send');
@@ -203,7 +205,7 @@ const postNewQuestion = (message) => {
     $('span:last > img').addClass('white-star');
     $('span:last > div').addClass($('body').attr('class'));
 
-    // 새 질문 입력 다시 디폴트 설정으로 변경
+    // 새 질문 입력 인터랙션 다시 디폴트 설정으로 변경
     $textarea.val('')
     $inputButton.addClass('input-send-dim');
     $mobileInputButton.removeClass('mobile-input-send-dim');
