@@ -123,7 +123,7 @@
                         <c:forEach items="${allComments}" var="comment">
                             <div data-commentId='<c:out value="${comment.commentId}"/>'>
                                 <ol><c:out value="${comment.content}"/></ol>
-                                <span>
+                                <span class="comment-likes">
                                     <img src="<%=request.getContextPath() %>/images/one_star.png" class="white-star yellow-star" alt="Button to recommend questions">
                                     <div><c:out value="${comment.likeCount}"/></div>
                                 </span>

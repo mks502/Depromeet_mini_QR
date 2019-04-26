@@ -8,7 +8,7 @@
         <title></title>
         <meta charset='UTF-8' />
         <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-        <link rel='stylesheet' type='text/css' href='<%=request.getContextPath()%>/css/style.css' />
+        <link rel='stylesheet' type='text/css' href='<%=request.getContextPath()%>/css/index.css' />
         <script src="http://code.jquery.com/jquery.min.js"></script>
         <script src="<%=request.getContextPath() %>/js/index.js" ></script> 
 
@@ -19,8 +19,8 @@
                 <div class="initial-col-1-1">
                     <div class="question-ranking-text">Question Ranking</div>
                     <div class="initial-background-button">
-                        <img src="./images/change-background-color-to-yellow.png" class="yellow-button" alt="Change the background color to yellow">
-                        <img src="./images/change-background-color-to-dark.png" class="dark-button" alt="Change the background color to dark">
+                        <img src="<%=request.getContextPath() %>/images/change-background-color-to-yellow.png" class="yellow-button" alt="Change the background color to yellow">
+                        <img src="<%=request.getContextPath() %>/images/change-background-color-to-dark.png" class="dark-button" alt="Change the background color to dark">
                     </div>
                 </div>
             </div>

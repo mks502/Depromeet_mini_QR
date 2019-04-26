@@ -199,7 +199,7 @@ const postNewQuestion = (message) => {
     const $textarea = $('textarea');
 
     // 새 질문 올리기
-    $ul.append(`<div data-commentId=${commentId}><ol></ol><span></span></div>`);
+    $ul.append(`<div data-commentId=${commentId}><ol></ol><span class="comment-likes"></span></div>`);
     $('ol:last').append(commentText);
     $('span:last').append('<img src="/mini_QR/images/white-star.png" class="yellow-star" alt="Button to recommend questions"><div>0</div>')
     $('span:last > img').addClass('white-star');
@@ -477,9 +477,12 @@ $(function () {
     }
 
     // 모든 메세지 별 아이콘에 업데이트 기능 추가
-    // const img = $('span:last > img');
-    // const likes = 
-    // addChangeLike(img, likes);
+    document.querySelectorAll('.comment-likes').forEach((span) => {
+        const childList = span.children;
+        const img = childList[0];
+        const likes = childList[1].textContent;
+        addChangeLike(img, likes);
+    });
 
     // URL 복사 기능
     copyURL();
