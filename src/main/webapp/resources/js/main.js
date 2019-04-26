@@ -119,31 +119,24 @@ const connectWebSockets = () => {
     stompClient.connect({}, (frame) => {
         console.log('소켓 연결되었습니다!');
 
-        // 서버로부터 STOMP 메세지를 전달받으면,
+        // 서버로부터 STOMP 메세지를 전달받으면, 콘텐츠 업데이트
         stompClient.subscribe(`/subscribe/seminar/${seminarId}`, (res) => {
 
+            console.log("메세지 도착: ", res);
             // JSON response 파싱
             const data = JSON.parse(res.body);
             console.log("메세지 파싱: ", data);
 
-            // 메세지가 종류가 새 질문 업데이트이면, 
+            // 새 질문 업데이트
             if (data.type === "comment") {
-                // 새 질문 화면에 표시
                 postNewQuestion(data);
-            } 
-            // 메세지가 like로 상태 업데이트면,
-            else if (data.type === "like") {
-                console.log("like");
-            }
-            // 메세지가 unlike로 상태 업데이트면,
-            else if (data.type === "unlike") {
-                console.log("unlike");
-            }
-            // 메세지가 랭킹 업데이트면,
-            else if (data.type === "ranking") {
-                console.log("ranking");
-            }
-            
+            // 좋아요 숫자 업데이트
+            } else if (data.type === "likes") {}
+
+            // 랭킹순위 업데이트
+            // if (data.type == "ranking") {
+            // 랭킹 순위 content와 like 수 바로 변경       }
+            // html/jsp 파일 랭킹 순위에 있는 contents와 like 수 default로 설정
         });
     });
 };
@@ -197,12 +190,7 @@ const enableOrDisableSendButton = () => {
 // 새 질문 업데이트
 const postNewQuestion = (message) => {
     console.log("새 질문 올립니다")
-    // 메세지로 받은 데이터 파싱
-    const comment = message.comment;
-    const commentText = comment.content;
-    const commentId = comment.commentId;
-
-    // 인터랙션 리셋 위한 변수 선언
+    const commentText = message.content;
     const $ul = $('ul');
     const $inputButton = $('.input-send');
     const $mobileInputButton = $('.mobile-input-send');
@@ -212,11 +200,11 @@ const postNewQuestion = (message) => {
     // 새 질문 올리기
     $ul.append(`<div data-commentId=${commentId}><ol></ol><span class="comment-likes"></span></div>`);
     $('ol:last').append(commentText);
-    $('span:last').append('<img src="/mini_QR/images/white-star.png" class="yellow-star" alt="Button to recommend questions"><div>0</div>')
+    $('span:last').append('<img src="<%=request.getContextPath() %>/images/white-star.png" class="yellow-star" alt="Button to recommend questions"><div>0</div>')
     $('span:last > img').addClass('white-star');
     $('span:last > div').addClass($('body').attr('class'));
 
-    // 새 질문 입력 인터랙션 다시 디폴트 설정으로 변경
+    // 새 질문 입력 다시 디폴트 설정으로 변경
     $textarea.val('')
     $inputButton.addClass('input-send-dim');
     $mobileInputButton.removeClass('mobile-input-send-dim');
@@ -302,96 +290,87 @@ const showOrFoldRankingMobile = (foldedHeight, strechedHeight) => {
 const showOrFoldRankingText = () => {
 
     const currentHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    const currentWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
-    function mainShowOrFoldRankingText(questionRankingOthersHeight, toOmissionTextLength) {
-        for (var i = 0; i < 4; i++) {
-            if ($('.ranking-text-rank-'+i).text().length < toOmissionTextLength) {
-                $('.more-rank-'+i).hide();
-            }
+    for (var i = 0; i < 4; i++) {
+        if ($('.ranking-text-rank-'+i).text().length < 172) {
+            $('.more-rank-'+i).hide();
         }
-        
-        $('.fold-rank-'+1).hide();
-    
-        $('.more-rank-'+1).click(() => {
-            $('.ranking-text-rank-'+1).removeClass('text-more');
-            $('.more-rank-'+1).hide();
-            $('.fold-rank-'+1).show();
-            
-            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
-            $('.question-contents').css({
-                'height': mainStrechedHeight,
-            });
-        });
-        $('.fold-rank-'+1).click(() => {
-            $('.ranking-text-rank-'+1).addClass('text-more');
-            $('.more-rank-'+1).show();
-            $('.fold-rank-'+1).hide();
-    
-            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
-            $('.question-contents').css({
-                'height': mainStrechedHeight,
-            });
-        });
-    
-        $('.fold-rank-'+2).hide();
-    
-        $('.more-rank-'+2).click(() => {
-            $('.ranking-text-rank-'+2).removeClass('text-more');
-            $('.more-rank-'+2).hide();
-            $('.fold-rank-'+2).show();
-    
-            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
-            $('.question-contents').css({
-                'height': mainStrechedHeight,
-            });
-        });
-        $('.fold-rank-'+2).click(() => {
-            $('.ranking-text-rank-'+2).addClass('text-more');
-            $('.more-rank-'+2).show();
-            $('.fold-rank-'+2).hide();
-    
-            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
-            $('.question-contents').css({
-                'height': mainStrechedHeight,
-            });
-        });
-    
-        $('.fold-rank-'+3).hide();
-    
-        $('.more-rank-'+3).click(() => {
-            $('.ranking-text-rank-'+3).removeClass('text-more');
-            $('.more-rank-'+3).hide();
-            $('.fold-rank-'+3).show();
-    
-            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
-            $('.question-contents').css({
-                'height': mainStrechedHeight,
-            });
-        });
-        $('.fold-rank-'+3).click(() => {
-            $('.ranking-text-rank-'+3).addClass('text-more');
-            $('.more-rank-'+3).show();
-            $('.fold-rank-'+3).hide();
-    
-            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
-            $('.question-contents').css({
-                'height': mainStrechedHeight,
-            });
-        });
     }
+    
+    $('.fold-rank-'+1).hide();
 
-    if ( currentWidth > 425 ) {
-        mainShowOrFoldRankingText(172, 172);
-    } else {
-        mainShowOrFoldRankingText(50, 42);
-    }
+    $('.more-rank-'+1).click(() => {
+        $('.ranking-text-rank-'+1).removeClass('text-more');
+        $('.more-rank-'+1).hide();
+        $('.fold-rank-'+1).show();
+        
+        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
+        $('.question-contents').css({
+            'height': mainStrechedHeight,
+        });
+    });
+    $('.fold-rank-'+1).click(() => {
+        $('.ranking-text-rank-'+1).addClass('text-more');
+        $('.more-rank-'+1).show();
+        $('.fold-rank-'+1).hide();
+
+        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
+        $('.question-contents').css({
+            'height': mainStrechedHeight,
+        });
+    });
+
+    $('.fold-rank-'+2).hide();
+
+    $('.more-rank-'+2).click(() => {
+        $('.ranking-text-rank-'+2).removeClass('text-more');
+        $('.more-rank-'+2).hide();
+        $('.fold-rank-'+2).show();
+
+        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
+        $('.question-contents').css({
+            'height': mainStrechedHeight,
+        });
+    });
+    $('.fold-rank-'+2).click(() => {
+        $('.ranking-text-rank-'+2).addClass('text-more');
+        $('.more-rank-'+2).show();
+        $('.fold-rank-'+2).hide();
+
+        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
+        $('.question-contents').css({
+            'height': mainStrechedHeight,
+        });
+    });
+
+    $('.fold-rank-'+3).hide();
+
+    $('.more-rank-'+3).click(() => {
+        $('.ranking-text-rank-'+3).removeClass('text-more');
+        $('.more-rank-'+3).hide();
+        $('.fold-rank-'+3).show();
+
+        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
+        $('.question-contents').css({
+            'height': mainStrechedHeight,
+        });
+    });
+    $('.fold-rank-'+3).click(() => {
+        $('.ranking-text-rank-'+3).addClass('text-more');
+        $('.more-rank-'+3).show();
+        $('.fold-rank-'+3).hide();
+
+        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
+        $('.question-contents').css({
+            'height': mainStrechedHeight,
+        });
+    });
 }
 
 // QR 코드를 클릭할 시, QR코드 보여주기

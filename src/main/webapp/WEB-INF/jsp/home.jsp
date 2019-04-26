@@ -9,7 +9,7 @@
 <head>
 	<meta http-equiv='Content-Type' content='text/html' charset='UTF-8' />
     <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
-    <link rel='stylesheet' type='text/css' href='style.css' />
+    <!-- <link rel='stylesheet' type='text/css' href='style.css' /> -->
     <script src="http://code.jquery.com/jquery.min.js"></script>
     <!-- <script src="../js/index.js"></script> -->
     <script src="index.js"></script>
