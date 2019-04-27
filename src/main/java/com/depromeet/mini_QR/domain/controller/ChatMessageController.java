@@ -74,17 +74,28 @@ public class ChatMessageController {
     public void like(Comment message, @PathVariable Map<String, Object> jsonData) {
     	
     	
-    	System.out.println("message 전송시작========================================= ");
+    	System.out.println("좋아요 message 전송시작========================================= ");
     	
         
         // message.setSeminarRoom((SeminarRoom)jsonData.get("seminarId"));
    
         String id=(String) jsonData.get("seminarId");
+        String cid=(String) jsonData.get("commentId");
+        System.out.println("세미나아이디: "+id);
         SeminarRoom s= srRepo.findBySeminarId(Long.parseLong(id));
         message.setSeminarRoom(s);
-        message.setLikeCount( message.getLikeCount()+1 );
+        Comment con=commentRepository.findByCommentId(Long.parseLong(cid));
+        message.setLikeCount( (con.getLikeCount()+1) );
+        System.out.println("메시지바줘 \n"+message);
+        
+        
+        
+        message.setContent(con.getContent());
         
         commentRepository.save(message);
+        
+        System.out.println("메시지 다시 바줘 \n"+message);
+        
         
         System.out.println(message.getSeminarRoom().getSeminarId());
         String a=message.getSeminarRoom().getSeminarId().toString();
@@ -107,15 +118,19 @@ public class ChatMessageController {
     public void unlike(Comment message, @PathVariable Map<String, Object> jsonData) {
     	
     	
-    	System.out.println("message 전송시작========================================= ");
+    	System.out.println("좋아요 취소 message 전송시작========================================= ");
     	
         
         // message.setSeminarRoom((SeminarRoom)jsonData.get("seminarId"));
    
         String id=(String) jsonData.get("seminarId");
+        String cid=(String) jsonData.get("commentId");
         SeminarRoom s= srRepo.findBySeminarId(Long.parseLong(id));
         message.setSeminarRoom(s);
-        message.setLikeCount( message.getLikeCount()-1 );
+        Comment con=commentRepository.findByCommentId(Long.parseLong(cid));
+        message.setLikeCount( (con.getLikeCount()-1) );
+        
+        message.setContent(con.getContent());
         
         commentRepository.save(message);
         
