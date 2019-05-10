@@ -109,6 +109,7 @@ public class ChatMessageController {
         this.template.convertAndSend("/subscribe/seminar/"+a, commentSendDto);
         
         System.out.println("message = "+message+" "+id);
+        getCommentRanking(Long.parseLong(id),a);
         
         System.out.println("======================================================= ");
         // @SendTo: /seminar/{seminarId}
@@ -148,14 +149,18 @@ public class ChatMessageController {
         
         System.out.println("message = "+message+" "+id);
         
+        getCommentRanking(Long.parseLong(id),a);
+
+        
         System.out.println("======================================================= ");
         // @SendTo: /seminar/{seminarId}
     }
     
     ////  완료!!!!!
-    public void getCommentRanking(Long seminarId) {
+    
+    public void getCommentRanking(Long seminarId,String num) {
     	////절대값 수정해주세요 :)
-    	seminarId = (long) 13;
+    	//seminarId = (long) 13;
     		
     	SeminarRoomDto seminarRoomDto = SeminarRoomDto.builder()
     			.seminarId(seminarId)
@@ -166,8 +171,12 @@ public class ChatMessageController {
     	RankingSendDto rankingSendDto = RankingSendDto.builder()
         		.type("ranking").commentList(commentList)
         		.build();
+    	System.out.println("랭킹"+commentList);
     	
     	System.out.println(rankingSendDto);
+    	//String a="13";
+    	this.template.convertAndSend("/subscribe/seminar/"+num, rankingSendDto);
+    	
     	
     }
 

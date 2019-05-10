@@ -42,7 +42,7 @@
                         <div class="box-5-col-1-contents-2">
                             <div class="url-address">${SeminarRoomDto.shortURL}</div>
                             <img src="<%=request.getContextPath() %>/images/url_copy_button.png" class="url-copy-button" alt="Copy button of URL">
-                            <img src="<%=request.getContextPath() %>/images/Copy_interaction_2.gif" class="url-copy-animation" alt="url copy animation">
+                            <img src="<%=request.getContextPath() %>/images/copy_interaction_final.gif" class="url-copy-animation" alt="url copy animation">
                         </div>
                     </div>
                     <!-- QR 코드 표시 -->

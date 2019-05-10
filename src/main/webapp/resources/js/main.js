@@ -17,10 +17,10 @@ const addChangeLike = (star) => {
         // like를 선택했을 경우,
         if ($starImg.hasClass('yellow-star')) {
             // 인터랙션 실행
-            $starImg.attr('src', '/mini_QR/images/Star_interaction_' + Math.floor(Math.random() * 6) + '.gif');
+            $starImg.attr('src', '/mini_QR/images/star_interaction_final.gif');
             setTimeout(() => {
                 $starImg.attr('src', '/mini_QR/images/one_star.png');
-            }, 2800);
+            }, 300);
             $starImg.toggleClass('yellow-star');
 
             // 웹소켓을 통해 서버로 like 상태 변경 전달
@@ -166,7 +166,7 @@ const copyURL = () => {
         setTimeout(() => {
             $('.url-copy-animation').hide();
             $('.url-copy-button').show();
-        }, 4500);
+        }, 500);
     });
 };
 
