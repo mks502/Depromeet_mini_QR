@@ -468,9 +468,9 @@ const uploadNewQuestion = () => {
     });
     $mobileInputButton.click(function() {
         if ($mobileInputButton.hasClass('mobile-input-send-dim')) {
-            console.log('질문을 입력하세요.');
-        } else {
             sendNewQuestion($newQuestionText);
+        } else {
+            console.log('질문을 입력하세요.');
         }
     });
 };
