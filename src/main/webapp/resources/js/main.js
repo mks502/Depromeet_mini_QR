@@ -107,6 +107,13 @@ const changeBackgroundColor = () => {
     });
 };
 
+// 질문 랭킹내에 질문이 존재하면 more 버튼 dim 처리 해제
+const releaseQustionRaningDim = () => {
+    if ($('.ranking-text-rank-1').text() !== '') {
+        $('.circle-button').attr('src', '/mini_QR/images/test.png');
+    }
+}
+
 // 웹소켓 연결하기
 const connectWebSockets = () => {
     let socket = new SockJS('/mini_QR/q-rank-websock');
@@ -138,6 +145,7 @@ const connectWebSockets = () => {
             else if (data.type === "ranking") {
                 console.log("랭킹 순위 업데이트...")
                 updateRanking(data);
+                releaseQustionRaningDim();
             }
         });
     });
@@ -198,7 +206,6 @@ const postNewQuestion = (message) => {
     const $ul = $('ul');
     const $inputButton = $('.input-send');
     const $mobileInputButton = $('.mobile-input-send');
-    const $beforeQuestionInput = $('.before-question-contents')
     const $textarea = $('textarea');
 
     // 새 질문 올리기
@@ -212,11 +219,19 @@ const postNewQuestion = (message) => {
     $textarea.val('')
     $inputButton.addClass('input-send-dim');
     $mobileInputButton.removeClass('mobile-input-send-dim');
-    $beforeQuestionInput.hide();
 
     // like 별 아이콘 상태 변경 기능 추가
     const $img = $('span:last > img');
     addChangeLike($img);
+};
+
+// 질문이 존재하면 '질문을 입력해 주세요' 숨김
+const hideBeforeQuestionContents = () => {
+    const $BeforeQuestionContents = $('.before-question-contents');
+
+    if ( $('ul > div').length > 0 ) {
+        $BeforeQuestionContents.hide()
+    }
 };
 
 // 웹소켓을 통해 서버에게 새 질문 전달
@@ -506,6 +521,9 @@ $(function () {
         $('.question-contents').css( "height", mainFoldedHeight );
     }
 
+    // 질문 존재 유무에 따라 안내 문구 숨김 기능
+    hideBeforeQuestionContents();
+    
     // 모든 메세지 별 아이콘에 업데이트 기능 추가
     const $likeList = $('.comment-likes');
     $likeList.each(function() {
