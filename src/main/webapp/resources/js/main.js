@@ -294,87 +294,96 @@ const showOrFoldRankingMobile = (foldedHeight, strechedHeight) => {
 const showOrFoldRankingText = () => {
 
     const currentHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    const currentWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
-    for (var i = 0; i < 4; i++) {
-        if ($('.ranking-text-rank-'+i).text().length < 172) {
-            $('.more-rank-'+i).hide();
+    function mainShowOrFoldRankingText(questionRankingOthersHeight, toOmissionTextLength) {
+        for (var i = 0; i < 4; i++) {
+            if ($('.ranking-text-rank-'+i).text().length < toOmissionTextLength) {
+                $('.more-rank-'+i).hide();
+            }
         }
-    }
-    
-    $('.fold-rank-'+1).hide();
-
-    $('.more-rank-'+1).click(() => {
-        $('.ranking-text-rank-'+1).removeClass('text-more');
-        $('.more-rank-'+1).hide();
-        $('.fold-rank-'+1).show();
         
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
-        });
-    });
-    $('.fold-rank-'+1).click(() => {
-        $('.ranking-text-rank-'+1).addClass('text-more');
-        $('.more-rank-'+1).show();
         $('.fold-rank-'+1).hide();
-
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
+    
+        $('.more-rank-'+1).click(() => {
+            $('.ranking-text-rank-'+1).removeClass('text-more');
+            $('.more-rank-'+1).hide();
+            $('.fold-rank-'+1).show();
+            
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
         });
-    });
-
-    $('.fold-rank-'+2).hide();
-
-    $('.more-rank-'+2).click(() => {
-        $('.ranking-text-rank-'+2).removeClass('text-more');
-        $('.more-rank-'+2).hide();
-        $('.fold-rank-'+2).show();
-
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
+        $('.fold-rank-'+1).click(() => {
+            $('.ranking-text-rank-'+1).addClass('text-more');
+            $('.more-rank-'+1).show();
+            $('.fold-rank-'+1).hide();
+    
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
         });
-    });
-    $('.fold-rank-'+2).click(() => {
-        $('.ranking-text-rank-'+2).addClass('text-more');
-        $('.more-rank-'+2).show();
+    
         $('.fold-rank-'+2).hide();
-
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
+    
+        $('.more-rank-'+2).click(() => {
+            $('.ranking-text-rank-'+2).removeClass('text-more');
+            $('.more-rank-'+2).hide();
+            $('.fold-rank-'+2).show();
+    
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
         });
-    });
-
-    $('.fold-rank-'+3).hide();
-
-    $('.more-rank-'+3).click(() => {
-        $('.ranking-text-rank-'+3).removeClass('text-more');
-        $('.more-rank-'+3).hide();
-        $('.fold-rank-'+3).show();
-
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
+        $('.fold-rank-'+2).click(() => {
+            $('.ranking-text-rank-'+2).addClass('text-more');
+            $('.more-rank-'+2).show();
+            $('.fold-rank-'+2).hide();
+    
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
         });
-    });
-    $('.fold-rank-'+3).click(() => {
-        $('.ranking-text-rank-'+3).addClass('text-more');
-        $('.more-rank-'+3).show();
+    
         $('.fold-rank-'+3).hide();
-
-        const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
-        const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-172)+"px";
-        $('.question-contents').css({
-            'height': mainStrechedHeight,
+    
+        $('.more-rank-'+3).click(() => {
+            $('.ranking-text-rank-'+3).removeClass('text-more');
+            $('.more-rank-'+3).hide();
+            $('.fold-rank-'+3).show();
+    
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
         });
-    });
+        $('.fold-rank-'+3).click(() => {
+            $('.ranking-text-rank-'+3).addClass('text-more');
+            $('.more-rank-'+3).show();
+            $('.fold-rank-'+3).hide();
+    
+            const $questionRankingMoreHeight = $('.Question-ranking-more').css('height').replace('px', '');
+            const mainStrechedHeight = parseInt(currentHeight-parseInt($questionRankingMoreHeight)-questionRankingOthersHeight)+"px";
+            $('.question-contents').css({
+                'height': mainStrechedHeight,
+            });
+        });
+    }
+
+    if ( currentWidth > 425 ) {
+        mainShowOrFoldRankingText(172, 172);
+    } else {
+        mainShowOrFoldRankingText(50, 42);
+    }
 }
 
 // QR 코드를 클릭할 시, QR코드 보여주기
