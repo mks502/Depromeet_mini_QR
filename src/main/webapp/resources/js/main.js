@@ -111,6 +111,7 @@ const changeBackgroundColor = () => {
 const releaseQustionRaningDim = () => {
     if ($('.ranking-text-rank-1').text() !== '') {
         $('.circle-button').attr('src', '/mini_QR/images/test.png');
+        $('.mobile-circle-button').attr('src', '/mini_QR/images/test.png');
     }
 }
 
@@ -520,9 +521,6 @@ $(function () {
     } else {
         $('.question-contents').css( "height", mainFoldedHeight );
     }
-
-    // 질문 존재 유무에 따라 안내 문구 숨김 기능
-    hideBeforeQuestionContents();
     
     // 모든 메세지 별 아이콘에 업데이트 기능 추가
     const $likeList = $('.comment-likes');
@@ -540,13 +538,6 @@ $(function () {
     // QR 코드 모달로 띄우기 기능
     showQRcode();
 
-    // 랭킹 순위 (Top 3) 질문 공개 및 숨김 기능
-    showOrFoldRanking(mainFoldedHeight);
-    showOrFoldRankingMobile(mobileFoldedHeight, mobileStrechedHeight);
-
-    // 랭킹 순위 내 질문의 글 공개 및 숨김 기능
-    showOrFoldRankingText();
-
     // 배경 색깔 변경 기능 
     changeBackgroundColor();
 
@@ -558,4 +549,14 @@ $(function () {
 
     // 새 질문 등록
     uploadNewQuestion();
+
+    // 질문 존재 유무에 따라 안내 문구 숨김 기능
+    hideBeforeQuestionContents();
+
+    // 랭킹 순위 (Top 3) 질문 공개 및 숨김 기능
+    showOrFoldRanking(mainFoldedHeight);
+    showOrFoldRankingMobile(mobileFoldedHeight, mobileStrechedHeight);
+
+    // 랭킹 순위 내 질문의 글 공개 및 숨김 기능
+    showOrFoldRankingText();
 });
