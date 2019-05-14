@@ -1,0 +1,181 @@
+/* default 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    background-color: #f1f1f1;
+    font-family: NotoSansCJKkr;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: #feb519;
+}
+
+/* 페이지 제목 및 버튼 스타일 설정 */
+.initial-col-1 {
+    height: 38vh;
+    display: flex;
+    justify-content: center;
+}
+
+.initial-col-1-1 {
+    height: 38px;
+    display: flex;
+    width: 91.66vw;
+    justify-content: space-between;
+}
+
+.question-ranking-text {
+    padding-top: 42px;
+    opacity: 0.87;
+    font-family: NotoSansCJKkr;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+.initial-background-button {
+    justify-content: flex-end;
+    padding-top: 42px;
+}
+
+.initial-background-button img {
+    height: fit-content;
+    padding-left: 8px;
+}
+
+/* 세미나 등록 스타일 설정 */
+.initial-col-2 {
+    height: 260px;
+    display: flex;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.initial-box-1 {
+    width: 678px;
+    height: 260px;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.16);
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+}
+
+.seminar-title {
+    height: 36px;
+    font-family: NotoSansCJKkr;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1.5;
+    color: rgba(0, 0, 0, 0.87);
+    margin-bottom: 32px;
+}
+
+.initial-box-1 input {
+    width: 614px;
+    height: 36px;
+    font-family: NotoSansCJKkr;
+    font-size: 24px;
+    line-height: 1.5;
+    border: 0;
+}
+
+.initial-box-1 input::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.under-line {
+    width: 614px;
+    height: 2px;
+    border: solid 1px rgba(112, 112, 112, 0.16);
+    margin-top: 8px;
+    margin-bottom: 46px;
+}
+
+.box-row {
+    height: 36px;
+    font-family: NotoSansCJKkr;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+.create-room-button {
+    border: none;
+    background-color: white;
+    font-size: 24px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.3);
+}
+
+.room-button-active {
+    color: rgba(0, 0, 0, 0.87);
+}
+
+/* 페이지 하단 공간 */
+.initial-col-3 {
+    height: 38vh;
+}
+
+/* 모바일 반응형 설정 */
+@media screen and (max-width: 679px) {
+    .initial-box-1 {
+        width: 328px;
+        height: 200px;
+        padding: 16px;
+    }
+
+    .initial-col-1, .initial-col-3 {
+        height: 34.375vh;
+    }
+
+    .initial-col-2 {
+        height: 31.25vh;
+    }
+
+    .initial-box-1 input {
+        width: 296px;
+        height: 24px;
+    }
+
+    .under-line {
+        width: 296px;
+        height: 1px;
+    }
+
+    .seminar-title {
+        height: 24px;
+        font-size: 16px;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    }
+
+    .question-ranking-text {
+        font-size: 20px;
+        line-height: 1.45;
+    }
+
+    .initial-box-1 input {
+        font-size: 16px;
+    }
+
+    .room-create-button div {
+        height: 24px;
+        font-size: 16px;
+        margin-top: 8px;
+    }
+}

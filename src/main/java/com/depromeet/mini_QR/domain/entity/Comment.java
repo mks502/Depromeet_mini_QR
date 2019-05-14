@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.annotations.ColumnDefault;
+import com.depromeet.mini_QR.domain.dto.CommentDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -33,4 +33,13 @@ public class Comment {
 	@ManyToOne
 	@JoinColumn(name = "seminarRoom")
 	SeminarRoom seminarRoom;
+	
+	public CommentDto toDto() {
+	      return CommentDto.builder()
+	            .commentId(commentId)
+	            .content(content)
+	            .likeCount(likeCount)
+	            .seminarRoom(seminarRoom)
+	            .build();
+	   }
 }

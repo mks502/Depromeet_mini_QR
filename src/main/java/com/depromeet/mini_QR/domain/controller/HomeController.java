@@ -17,14 +17,7 @@ public class HomeController {
 	
 	@GetMapping(value = "/")
     public String index(HttpServletRequest req, HttpServletResponse res) {
-        return "home";
+		System.out.println("구동시작!..");
+        return "index";
     }
-	
-	@Autowired
-	SeminarRoomService seminarRoomService;
-	
-	@PostMapping(value = "/seminar/{seminarId}")
-	public void setSeminarName(@RequestBody SeminarRoom seminarTitle, HttpServletRequest request){
-		seminarRoomService.postSeminarRoomTitle(seminarTitle);
-	}
 }

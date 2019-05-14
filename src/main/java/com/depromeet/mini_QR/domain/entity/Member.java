@@ -18,4 +18,5 @@ import lombok.NoArgsConstructor;
 public class Member {
 	@Id @GeneratedValue(strategy = GenerationType.AUTO)
 	Long mid;
+	Long seminarId;
 }
