@@ -173,6 +173,9 @@ const connectWebSockets = () => {
             else if (data.type === "ranking") {
                 console.log("랭킹 순위 업데이트...")
                 updateRanking(data);
+                
+                // 랭킹 순위 질문 유무에 따라 버튼 활성화
+                questionRankingEnable(currentWidth);
             }
         });
     });
@@ -250,6 +253,9 @@ const postNewQuestion = (message) => {
     // like 별 아이콘 상태 변경 기능 추가
     const $img = $('span:last > img');
     addChangeLike($img);
+
+    // 질문이 존재하면 '질문을 입력해 주세요' 숨김
+    hideBeforeQuestionContents();
 };
 
 // 질문이 존재하면 '질문을 입력해 주세요' 숨김
@@ -275,12 +281,12 @@ const showOrFoldRanking = (foldedHeight) => {
     const $questionRankingMore = $('.Question-ranking-more');
     const $questionContents = $('.question-contents');
     const $foldButton = $('.fold-button');
-    const $moreButton = $('.more-button');
+    const $circleButton = $('.circle-button');
 
     $questionRankingMore.hide();
     $foldButton.hide();
     
-    $moreButton.click(() => {
+    $circleButton.click(() => {
         $questionRanking.hide();
         $questionRankingMore.show();
         $foldButton.show();
@@ -305,7 +311,7 @@ const showOrFoldRankingMobile = (foldedHeight, strechedHeight) => {
     const $questionRankingMore = $('.Question-ranking-more');
     const $questionContents = $('.question-contents');
     const $circleButton = $('.mobile-circle-button');
-    const $secondCircleButton = $('.mobile-circle-button-2')
+    const $secondCircleButton = $('.mobile-circle-button-2');
 
     $circleButton.click(() => {
         $questionRanking.hide();
@@ -495,8 +501,6 @@ const uploadNewQuestion = () => {
 
     // send 버튼을 누르면, 서버에게 새 질문 전달
     $inputButton.click(function() {
-        // 랭킹 순위 질문 유무에 따라 버튼 활성화
-        questionRankingEnable(currentWidth);
         if ($inputButton.hasClass('input-send-dim')) {
             console.log('질문을 입력하세요.');
         } else {
