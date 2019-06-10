@@ -28,3 +28,4 @@
 - 전용성(Front-end) - [yongseong.jeon95@gmail.com](mailto:yongseong.jeon95@gmail.com)
 - 마규석(Back-end) - [fhxm122@gmail.com](mailto:fhxm122@gmail.com)
 - 김신제(Back-end) - [shinjehere@gmail.com](mailto:shinjehere@gmail.com)
+
