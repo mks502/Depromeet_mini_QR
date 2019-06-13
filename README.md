@@ -2,7 +2,7 @@
 
 > OurQuestion은 세미나에서 익명으로 질의·응답을 할 수 있는 웹 애플리케이션입니다. 참여자들은 각 질문에 좋아요를 표시할 수 있으며, 강연자가 답변하기 편리하도록 좋아요 순위가 가장 높은 3가지 질문을 따로 보여줍니다.
 
-![시연 영상](https://im4.ezgif.com/tmp/ezgif-4-40389977e5a5.gif)
+![시연 영상](https://github.com/ShinJeKim/Depromeet_mini_QR/blob/master/simulation.gif)
 
 애플리케이션 접속: http://15.164.104.40:8081/mini_QR/
 
