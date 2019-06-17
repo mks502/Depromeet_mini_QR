@@ -25,7 +25,8 @@ public class SeminarRoomService {
 		SeminarRoom newSeminar =seminarRoomRepository.findBySeminarTitle(title);
 		String full= "/seminar/";
 		String seminarid= Long.toString(newSeminar.getSeminarId());
-		String longURL = "http://lvh.me/mini_QR/";
+		String longURL = "http://15.164.104.40:8081/mini_QR/";
+//		String longURL = "http://lvh.me/mini_QR/";
 		
 		full= full.concat(seminarid);
 		newSeminar.setFullURL(full);
