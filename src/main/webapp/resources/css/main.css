@@ -137,7 +137,7 @@ body {
     position: relative;
 }
 
-.circle-button {
+.circle-button, .circle-button-dim {
     height: fit-content;
 }
 
@@ -622,7 +622,7 @@ span div {
         background-color: #f1f1f1;
     }
     
-    .mobile-circle-button {
+    .mobile-circle-button, .mobile-circle-button-dim {
         width: 32px;
         height: 32px;
         box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.16);
