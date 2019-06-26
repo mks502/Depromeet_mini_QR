@@ -78,7 +78,6 @@ public class ChatMessageController {
         message.setLikeCount((comment.getLikeCount()+1));
         message.setContent(comment.getContent());
         commentRepository.save(message);
-
         CommentSendDto commentSendDto = CommentSendDto.builder()
         		.type("like").comment(message)
         		.build();
