@@ -126,6 +126,11 @@ body {
     color: rgba(0, 0, 0, 0.87);
 }
 
+/* 배경색 변경 버튼, 만들기 버튼에 포인터 커서 효과 */
+.create-room-button:hover, .yellow-button:hover, .dark-button:hover {
+    cursor: pointer;
+}
+
 /* 페이지 하단 공간 */
 .initial-col-3 {
     height: 38vh;
