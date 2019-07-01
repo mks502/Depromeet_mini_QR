@@ -173,9 +173,9 @@ const connectWebSockets = () => {
             else if (data.type === "ranking") {
                 console.log("랭킹 순위 업데이트...")
                 updateRanking(data);
-                
+
                 // 랭킹 순위 질문 유무에 따라 버튼 활성화
-                questionRankingEnable(currentWidth);
+                questionRankingEnable(Math.max(document.documentElement.clientWidth, window.innerWidth || 0));
             }
         });
     });
