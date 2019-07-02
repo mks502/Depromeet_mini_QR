@@ -11,6 +11,10 @@ public class CommentService {
 	@Autowired
 	CommentRepository commentRepository;
 	
+	/**
+	 * 작성된 코멘트 메시지 저장 
+	 * @param comment
+	 */
 	public void postComment(Comment comment) {
 		commentRepository.save(comment);
 	}

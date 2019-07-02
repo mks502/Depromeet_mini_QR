@@ -29,7 +29,7 @@
             <div class="initial-col-2">
                 <div class="initial-box-1">
                     <div class="seminar-title">세미나 이름</div>
-                    <form method="POST" action="<%=request.getContextPath() %>/api/seminar1/create" accept-charset="UTF-8">
+                    <form method="POST" action="<%=request.getContextPath() %>/api/seminar/create" accept-charset="UTF-8">
                         <input name="seminarTitle" type="text" placeholder="세미나 이름을 입력해 주세요">
                         <div class="under-line"></div>
                         <div class="box-row">

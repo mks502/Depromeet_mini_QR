@@ -17,7 +17,6 @@ public class HomeController {
 	
 	@GetMapping(value = "/")
     public String index(HttpServletRequest req, HttpServletResponse res) {
-		System.out.println("구동시작!..");
         return "index";
     }
 }
