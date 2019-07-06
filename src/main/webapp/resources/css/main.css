@@ -248,6 +248,7 @@ ol {
     text-align: left;
     color: rgba(0, 0, 0, 0.87);
     white-space: pre-wrap;
+    word-break: break-all;
 }
 
 ul div {
@@ -670,5 +671,9 @@ span div {
     .modal-content canvas {
         width: 215px;
         height: 215px;
+    }
+
+    ol {
+        word-break: break-all;
     }
 }
