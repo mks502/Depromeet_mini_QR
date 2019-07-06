@@ -37,6 +37,10 @@ body {
     width: fit-content;
 }
 
+.ranking-text-rank-1, .ranking-text-rank-2, .ranking-text-rank-3 {
+    word-wrap: break-word;
+}
+
 /* 첫번째 열: 세미나 방 정보 박스 */
 .column-1 {
     display: flex;
@@ -603,6 +607,10 @@ span div {
         width: fit-content;
         height: fit-content;
         min-height: 40px;
+    }
+
+    .ranking-text-rank-1, .ranking-text-rank-2, .ranking-text-rank-3 {
+        word-wrap: break-word;
     }
 
     .fold-button {
