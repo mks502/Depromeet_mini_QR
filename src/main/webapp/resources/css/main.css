@@ -189,6 +189,7 @@ body {
     display: flex;
     flex-direction: column-reverse;
     overflow: scroll;
+    overflow-x : hidden;
 }
 
 /* 새 질문 등록 */
@@ -463,6 +464,16 @@ span div {
     position: relative;
     bottom: 23px;
     height: 48px;
+}
+
+.yellow-button, .dark-button {
+    width: 28px;
+    height: 28px;
+}
+
+.star-and-number img {
+    width: 32px;
+    height: 32px;
 }
 
 .yellow-button:hover, .dark-button:hover, .url-copy-button:hover, .qr-code-more-button:hover, 
