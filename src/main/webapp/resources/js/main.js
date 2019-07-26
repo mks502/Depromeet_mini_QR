@@ -176,6 +176,8 @@ const connectWebSockets = () => {
 
                 // 랭킹 순위 질문 유무에 따라 버튼 활성화
                 questionRankingEnable(Math.max(document.documentElement.clientWidth, window.innerWidth || 0));
+                // 랭킹 순위 질문 길이에 따라 more, fold 기능
+                showOrFoldRankingText();
             }
         });
     });
@@ -340,6 +342,8 @@ const showOrFoldRankingText = () => {
         for (var i = 0; i < 4; i++) {
             if ($('.ranking-text-rank-'+i).text().length < toOmissionTextLength) {
                 $('.more-rank-'+i).hide();
+            } else {
+                $('.more-rank-'+i).show();
             }
         }
         

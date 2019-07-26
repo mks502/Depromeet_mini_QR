@@ -131,6 +131,11 @@ body {
     cursor: pointer;
 }
 
+.yellow-button, .dark-button {
+    width: 28px;
+    height: 28px;
+}
+
 /* 페이지 하단 공간 */
 .initial-col-3 {
     height: 38vh;

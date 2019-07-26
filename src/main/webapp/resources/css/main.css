@@ -37,6 +37,10 @@ body {
     width: fit-content;
 }
 
+.ranking-text-rank-1, .ranking-text-rank-2, .ranking-text-rank-3 {
+    word-wrap: break-word;
+}
+
 /* 첫번째 열: 세미나 방 정보 박스 */
 .column-1 {
     display: flex;
@@ -185,6 +189,7 @@ body {
     display: flex;
     flex-direction: column-reverse;
     overflow: scroll;
+    overflow-x : hidden;
 }
 
 /* 새 질문 등록 */
@@ -244,6 +249,7 @@ ol {
     text-align: left;
     color: rgba(0, 0, 0, 0.87);
     white-space: pre-wrap;
+    word-break: break-all;
 }
 
 ul div {
@@ -460,6 +466,16 @@ span div {
     height: 48px;
 }
 
+.yellow-button, .dark-button {
+    width: 28px;
+    height: 28px;
+}
+
+.star-and-number img {
+    width: 32px;
+    height: 32px;
+}
+
 .yellow-button:hover, .dark-button:hover, .url-copy-button:hover, .qr-code-more-button:hover, 
 .qr-code-fold-button:hover, .more-rank-1:hover, .more-rank-2:hover, .more-rank-3:hover, 
 .input-send:hover, .mobile-input-send:hover, .box-qr-code:hover, .circle-button:hover, 
@@ -605,6 +621,10 @@ span div {
         min-height: 40px;
     }
 
+    .ranking-text-rank-1, .ranking-text-rank-2, .ranking-text-rank-3 {
+        word-wrap: break-word;
+    }
+
     .fold-button {
         display: none;
     }
@@ -662,5 +682,9 @@ span div {
     .modal-content canvas {
         width: 215px;
         height: 215px;
+    }
+
+    ol {
+        word-break: break-all;
     }
 }
